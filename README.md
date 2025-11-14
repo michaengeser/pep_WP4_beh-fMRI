@@ -13,41 +13,78 @@ Basic structure
 pep_wp4_beh-fMRI/
 
 │
+
 ├── fMRI
+
 │ ├── code
+
 │ ├── derivatives
 
 │ ├── drawings
+
 │ ├── localizer
+
 │ ├── MNI_ROIs
+
 │ ├── photos
+
 │ ├── sourcedata
+
 │ ├── stimuli
+
 │ ├── vgg16_imagenet
+
 │ └── vgg16_places265
+
 │
+
 ├── behavior
+
 │ ├── experiment/ # Behavioural experiments (Matlab + Psychtoolbox)
+
 │ │ ├── data
+
 │ │ ├── functions
+
 │ │ ├── instructions
+
 │ │ ├── stimuli
+
 │ │ ├── trial_matrices
+
 │ │ └── Run_wp4_beh.m
+
 │ │ 
+
 │ ├── analysis/ # Data analysis scripts (Matlab, R, Python)
+
 │ │ ├── functions
+
 │ │ ├── vgg16_imagenet
+
 │ │ ├── vgg16_places265
+
 │ │ ├── analysis_script_exp1.mlx
+
 │ │ └── analysis_script_exp2.mlx
+
 │ │ 
+
 │ ├──image_similarities/ # Drawings and generated photorealistic images
+
 │ │ ├── drawings_draw3D
+
 │ │ ├── drawings_human_rated
+
 │ │ └── pictures
+
 │
+
 └── README.md
+
+
+
+[...]
 
 Under experiment, you can find the code and stimuli for the behavioural experiments, including the categorization tasks (Experiments 1 and 2) and the rating task (Experiment 1). The experiments are implemented in MATLAB using Psychtoolbox-3.
 
