@@ -1,0 +1,6 @@
+sub_num,trial,block,task,is_practice,category,image,texture,duration,mask_dur,jitter,stim_time,time_of_resp,trial_response,mask_time,fix_time,jit_onset,trial_end,trial_accuracy,RT
+104,6,0,aesthetic,1,kitchen,kitchen_practice2.tif,227,1.5,0,1.08333333333333,3637.523634,3641.730439166,4,NaN,3641.736694958,3641.755210458,3642.831976375,NaN,NaN
+104,7,0,aesthetic,1,kitchen,kitchen_practice1.tif,226,1.5,0,1.06666666666667,3642.840530583,3645.61871025,3,NaN,3645.62460775,3645.6430595,3646.703130791,NaN,NaN
+104,8,0,aesthetic,1,kitchen,kitchen_practice4.tif,229,1.5,0,1.11666666666667,3646.711637375,3650.994411541,5,NaN,3651.000553625,3651.018921083,3652.129010666,NaN,NaN
+104,9,0,aesthetic,1,kitchen,kitchen_practice3.tif,228,1.5,0,0.95,3652.137119583,3656.379012541,4,NaN,3656.384648458,3656.403029666,3657.346373291,NaN,NaN
+104,10,0,aesthetic,1,kitchen,kitchen_practice5.tif,230,1.5,0,0.9,3657.350967666,3661.323277708,4,NaN,3661.328718833,3661.347036583,3662.240377,NaN,NaN

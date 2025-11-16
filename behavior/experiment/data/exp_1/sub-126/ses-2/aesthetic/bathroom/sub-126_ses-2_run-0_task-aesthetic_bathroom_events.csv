@@ -1,0 +1,6 @@
+sub_num,trial,block,task,is_practice,category,image,texture,duration,mask_dur,jitter,stim_time,time_of_resp,trial_response,mask_time,fix_time,jit_onset,trial_end,trial_accuracy,RT
+126,1,0,aesthetic,1,bathroom,bathroom_practice1.tif,221,1.5,0,1.6,7486.417633166,7491.177764166,4,NaN,7491.184433875,7491.202855541,7492.796240041,NaN,NaN
+126,2,0,aesthetic,1,bathroom,bathroom_practice2.tif,222,1.5,0,1.26666666666667,7492.810399,7496.073224041,3,NaN,7496.079574041,7496.098364791,7497.358396916,NaN,NaN
+126,3,0,aesthetic,1,bathroom,bathroom_practice3.tif,223,1.5,0,1.15,7497.376705125,7500.257756958,4,NaN,7500.263303,7500.281550375,7501.424934125,NaN,NaN
+126,4,0,aesthetic,1,bathroom,bathroom_practice4.tif,224,1.5,0,1.75,7501.434963333,7504.225163041,2,NaN,7504.230987958,7504.249163375,7505.99253175,NaN,NaN
+126,5,0,aesthetic,1,bathroom,bathroom_practice5.tif,225,1.5,0,0.85,7506.0123345,7508.990797083,6,NaN,7509.019564166,7509.043178,7509.886519,NaN,NaN

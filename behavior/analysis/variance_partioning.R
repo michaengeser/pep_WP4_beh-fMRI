@@ -1,0 +1,116 @@
+# clear workspace
+rm(list = ls())
+
+# install all needed packages 
+pacman::p_load('dplyr',  'car','lme4','eulerr', 'vegan')
+library(partR2)
+
+# loading and transform data ---------------------------------------------------
+
+# make file directory
+bathroom_file = 'C:/Users/JLU-SU/OneDrive - Justus-Liebig-Universität Gießen/Dokumente/GitHub/pep_wp4_beh/analysis/subject_pairs_table_bathroom.csv'
+kitchen_file = 'C:/Users/JLU-SU/OneDrive - Justus-Liebig-Universität Gießen/Dokumente/GitHub/pep_wp4_beh/analysis/subject_pairs_table_kitchen.csv'
+bedroom_file = 'C:/Users/JLU-SU/OneDrive - Justus-Liebig-Universität Gießen/Dokumente/GitHub/pep_wp4_beh/analysis/subject_pairs_table_bedroom.csv'
+living_file = 'C:/Users/JLU-SU/OneDrive - Justus-Liebig-Universität Gießen/Dokumente/GitHub/pep_wp4_beh/analysis/subject_pairs_table_livingroom.csv'
+
+
+# load file name 
+subject_bath_table = read.csv(bathroom_file)
+subject_kit_table = read.csv(kitchen_file)
+subject_bed_table = read.csv(bedroom_file)
+subject_living_table = read.csv(living_file)
+
+# combine categories
+subject_table_exp1 = rbind(subject_bath_table, subject_kit_table)
+subject_table_exp2 = rbind(subject_bed_table, subject_living_table)
+subject_table_exp2 = subject_table_exp2 %>% mutate(photo = NaN)
+
+
+# center variables 
+subject_table_exp1 = subject_table_exp1 %>% mutate(c_own_drw = own_drw - mean(own_drw))
+subject_table_exp1 = subject_table_exp1 %>% mutate(c_ctr_drw = ctr_drw - mean(ctr_drw))
+subject_table_exp1 = subject_table_exp1 %>% mutate(c_photo = photo - mean(photo))
+subject_table_exp1 = subject_table_exp1 %>% mutate(c_IES = IES - mean(IES))
+subject_table_exp2 = subject_table_exp2 %>% mutate(c_own_drw = own_drw - mean(own_drw))
+subject_table_exp2 = subject_table_exp2 %>% mutate(c_ctr_drw = ctr_drw - mean(ctr_drw))
+subject_table_exp2 = subject_table_exp2 %>% mutate(c_photo = photo - mean(photo))
+subject_table_exp2 = subject_table_exp2 %>% mutate(c_IES = IES - mean(IES))
+
+
+# make subjects and category factors
+subject_table_exp1 = subject_table_exp1 %>% mutate(sub1 = factor(sub1))
+subject_table_exp1 = subject_table_exp1 %>% mutate(sub2 = factor(sub2))
+subject_table_exp1 = subject_table_exp1 %>% mutate(category = factor(category))
+subject_table_exp2 = subject_table_exp2 %>% mutate(sub1 = factor(sub1))
+subject_table_exp2 = subject_table_exp2 %>% mutate(sub2 = factor(sub2))
+subject_table_exp2 = subject_table_exp2 %>% mutate(category = factor(category))
+
+# combine experiments
+subject_table_all = rbind(subject_table_exp1, subject_table_exp2)
+
+
+# experiment 1 -----------------------------------------------------------------
+
+cre_model_exp1 = lmer(c_IES ~ c_own_drw*c_ctr_drw*c_photo +
+                   (1*c_own_drw*c_ctr_drw*c_photo | category)+
+                   (1*c_own_drw*c_ctr_drw*c_photo | sub1)+
+                   (1*c_own_drw*c_ctr_drw*c_photo | sub2),
+                 data=subject_table_exp1)
+
+
+summary(cre_model_exp1)
+Anova(cre_model_exp1)
+
+# variance partioning
+cre_model_part1 <- partR2(cre_model_exp1, data = subject_table_exp1, partvars = c("c_own_drw", "c_ctr_drw", "c_photo"), 
+                         R2_type = "marginal", nboot = 10)
+summary(cre_model_part1)
+
+# extract R2 values for partions 
+cre_model1_R2 <- cre_model_part1[["R2"]][["estimate"]]
+
+# Create the data for the Euler diagram
+fit <- euler(c(
+  "own" = cre_model1_R2[2],               # Unique to own_drw
+  "ctr" = cre_model1_R2[3],               # Unique to ctr_drw
+  "photo" = cre_model1_R2[4],               # Unique to photo
+  "own&ctr" = cre_model1_R2[5],   # Shared between own_drw and ctr_drw
+  "own&photo" = cre_model1_R2[6],   # Shared between own_drw and photo
+  "ctr&photo" = cre_model1_R2[7],   # Shared between ctr_drw and photo
+  "own&ctr&photo" = cre_model1_R2[8]),  # Shared among all three
+   shape = "ellipse"
+  )
+
+# Plot the Euler diagram
+plot(fit, main = "Variance Partitioning (R²) - Euler Diagram")
+
+# experiment 2 -----------------------------------------------------------------
+
+cre_model_exp2 = lmer(c_IES ~ c_own_drw*c_ctr_drw +
+                        (1*c_own_drw*c_ctr_drw | category)+
+                        (1*c_own_drw*c_ctr_drw | sub1)+
+                        (1*c_own_drw*c_ctr_drw | sub2),
+                      data=subject_table_exp2)
+summary(cre_model_exp2)
+Anova(cre_model_exp2)
+
+# variance partioning
+cre_model_part2 <- partR2(cre_model_exp2, data = subject_table_exp2, partvars = c("c_own_drw", "c_ctr_drw"), 
+                          R2_type = "marginal", nboot = 10)
+summary(cre_model_part2)
+
+# extract R2 values for partions 
+cre_model2_R2 <- cre_model_part2[["R2"]][["estimate"]]
+
+# Create the data for the Euler diagram
+fit <- euler(c(
+  "own" = cre_model2_R2[2],               # Unique to own_drw
+  "ctr" = cre_model2_R2[3],               # Unique to ctr_drw
+  "own&ctr" = cre_model2_R2[4]),   # Shared between own_drw and ctr_drw
+  shape = "ellipse"
+)
+
+# Plot the Euler diagram
+plot(fit, main = "Variance Partitioning (R²) - Euler Diagram")
+
+

@@ -1,0 +1,1264 @@
+
+PsychStartup: Adding path of installed GStreamer runtime to library path. [C:\gstreamer\1.0\msvc_x86_64\bin]
+>> PreFolderName = fullfile(pwd, 'data');
+>> sub = 103
+
+sub =
+
+   103
+
+>> SubFolderName = fullfile(PreFolderName, ['sub-',num2str(sub)]);
+>> SubFolderName
+
+SubFolderName =
+
+    'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\GitHub\pep_wp4\data\sub-103'
+
+>> ses = 1
+
+ses =
+
+     1
+
+>> SesFolderName = fullfile(SubFolderName, ['ses-',num2str(ses)]);
+>> SesFolderName
+
+SesFolderName =
+
+    'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\GitHub\pep_wp4\data\sub-103\ses-1'
+
+>> load('C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\GitHub\pep_wp4\data\sub-101\ses-1\categorization\sub-101_ses-1_run-1_task-categorization_events_repetition_1.mat')
+>> 
+>> fileNames = dir(fullfile(CateFolderName, '*.mat'));
+Unrecognized function or variable 'CateFolderName'.
+ 
+>>         CateFolderName = fullfile(SesFolderName, 'categorization');
+
+        fileNames = dir(fullfile(CateFolderName, '*.mat'));
+>> file_names.name
+Unable to resolve the name 'file_names.name'.
+ 
+Did you mean:
+>>  file_names = dir(fullfile(CateFolderName, '*.mat'));
+>> file_names.name
+
+ans =
+
+    'sub-103_ses-1_run-0_task-categorization_events.mat'
+
+
+ans =
+
+    'sub-103_ses-1_run-1_task-categorization_events.mat'
+
+
+ans =
+
+    'sub-103_ses-1_run-2_task-categorization_events.mat'
+
+
+ans =
+
+    'sub-103_ses-1_run-3_task-categorization_events.mat'
+
+
+ans =
+
+    'sub-103_ses-1_run-4_task-categorization_events.mat'
+
+
+ans =
+
+    'sub-103_ses-1_run-5_task-categorization_events.mat'
+
+
+ans =
+
+    'sub-103_ses-1_run-6_task-categorization_events.mat'
+
+
+ans =
+
+    'sub-103_ses-1_run-7_task-categorization_events.mat'
+
+
+ans =
+
+    'sub-103_ses-1_run-8_task-categorization_events.mat'
+
+
+ans =
+
+    'sub-103_ses-1_run-all_task-categorization_events.mat'
+
+>> wef = file_names.name;
+>> wef = file_names(:).name;
+>>         i = 0;
+        for file_name = file_names.name
+            i = 1 +1;
+        end 
+A dot '.' indexing expression produced a comma-separated list with 10 values where only a
+single value is allowed.
+
+Related documentation
+ 
+>> wef = file_names{:}.name;
+Brace indexing is not supported for variables of this type.
+ 
+>> wef = file_names(1:10).name;
+>> wef = file_names(2).name;
+>> wef = file_names(7).name;
+>> wef = file_names(:).name;
+>> length(file_names(:).name)
+Error using length
+Too many input arguments.
+ 
+>> length(file_names.name)
+Error using length
+Too many input arguments.
+ 
+>> wef = {file_names.name};
+>>         i = 0;
+        for file_name = {file_names.name}
+            i = 1 +1
+        end 
+
+i =
+
+     2
+
+
+i =
+
+     2
+
+
+i =
+
+     2
+
+
+i =
+
+     2
+
+
+i =
+
+     2
+
+
+i =
+
+     2
+
+
+i =
+
+     2
+
+
+i =
+
+     2
+
+
+i =
+
+     2
+
+
+i =
+
+     2
+
+>> 
+>> 
+>> exist('CateFolderName', 'dir')
+
+ans =
+
+     0
+
+>> exist(CateFolderName, 'dir')
+
+ans =
+
+     7
+
+>> SubSesFolder
+Unrecognized function or variable 'SubSesFolder'.
+ 
+>> CateFolderName
+
+CateFolderName =
+
+    'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\GitHub\pep_wp4\data\sub-103\ses-1\categorization'
+
+>> 
+                ses_mat = load(file_name);
+Error using load
+Must be a text scalar.
+ 
+>> file_name = {file_names.name}(1)
+ file_name = {file_names.name}(1)
+                              ↑
+Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise,
+check for mismatched delimiters.
+ 
+>> file_name = {file_names.name}{1}
+ file_name = {file_names.name}{1}
+                              ↑
+Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise,
+check for mismatched delimiters.
+ 
+>> file_nameS = {file_names.name}{1}
+ file_nameS = {file_names.name}{1}
+                               ↑
+Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise,
+check for mismatched delimiters.
+ 
+>> file_nameS = {file_names.name}
+
+file_nameS =
+
+  1×10 cell array
+
+  Columns 1 through 3
+
+    {'sub-103_ses-1_r…'}    {'sub-103_ses-1_r…'}    {'sub-103_ses-1_r…'}
+
+  Columns 4 through 6
+
+    {'sub-103_ses-1_r…'}    {'sub-103_ses-1_r…'}    {'sub-103_ses-1_r…'}
+
+  Columns 7 through 9
+
+    {'sub-103_ses-1_r…'}    {'sub-103_ses-1_r…'}    {'sub-103_ses-1_r…'}
+
+  Column 10
+
+    {'sub-103_ses-1_r…'}
+
+>> file_name = file_nameS{1};
+>> 
+                ses_mat = load(file_name);
+Error using load
+Unable to find file or directory 'sub-103_ses-1_run-0_task-categorization_events.mat'.
+ 
+>> 
+                ses_mat = load(fullfile(CateFolderName, file_name));
+>> checkImgAcc([103,102,101])
+'checkImgAcc' is not found in the current folder or on the MATLAB path, but exists in:
+    C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität
+    Gießen\Dokumente\GitHub\pep_wp4\functions
+
+Change the MATLAB current folder or add its folder to the MATLAB path.
+ 
+>> function_folder = [pwd,filesep,'functions\'];
+addpath(function_folder)
+>> checkImgAcc([103,102,101])
+Unrecognized function or variable 'ses_mat'.
+
+Error in checkImgAcc (line 30)
+                    all_mat = ses_mat;
+ 
+>> checkImgAcc([103,102,101])
+Error using load
+Must be a text scalar.
+
+Error in checkImgAcc (line 25)
+                    ses_mat = load(fullfile(CateFolderName, file_name));
+ 
+>> checkImgAcc([103,102,101])
+25                      ses_mat = load(fullfile(CateFolderName, file_name));
+K>> fullfile(CateFolderName, file_name)
+
+ans =
+
+  1×1 cell array
+
+    {'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\GitHub\pep_wp4\data\sub-103\ses-1\categorization\sub-103_ses-1_run-all_task-categorization_events.mat'}
+
+K>> file_name
+
+file_name =
+
+  1×1 cell array
+
+    {'sub-103_ses-1_run-all_task-categorization_events.mat'}
+
+K>> ses_mat = load(fullfile(CateFolderName, file_name));
+Error using load
+Must be a text scalar.
+ 
+K>> ses_mat = load(fullfile(CateFolderName, cell2mat(file_name)));
+K>> fullfile(CateFolderName, cell2mat(file_name))
+
+ans =
+
+    'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\GitHub\pep_wp4\data\sub-103\ses-1\categorization\sub-103_ses-1_run-all_task-categorization_events.mat'
+
+K>>                     input_mat = load(fullfile(CateFolderName, cell2mat(file_name)));
+                    ses_mat = input_mat.input_table;
+>> all_mat = checkImgAcc([103,102,101]);
+>> images_names = unique(all_mat.image);
+>> image_acc_struct = struct('image_name', images_names, ...
+    'category', nan(1,length(images_names)), 'mean_accuracy', nan(1,length(images_names)));
+>> image_acc_struct = table('image_name', images_names, ...
+    'category', nan(1,length(images_names)), 'mean_accuracy', nan(1,length(images_names)));
+Error using table
+Invalid parameter name: image_name.
+
+Caused by:
+    You might have intended to create a one-row table with the character
+    vector 'image_name' as one of its variables. To store text data in a
+    table, use a string array or a cell array of character vectors rather
+    than character arrays. Alternatively, create a cell array with one row,
+    and convert that to a table using CELL2TABLE.
+ 
+>> image_acc_table = table(images_names, nan(1,length(images_names)), nan(1,length(images_names)),...
+    'VariableNames', variable_names);
+Unrecognized function or variable 'variable_names'.
+ 
+>> % init table
+% define column names
+variable_names = {'image_name', 'category', 'mean_acc'};
+
+image_acc_table = table(images_names, nan(1,length(images_names)), nan(1,length(images_names)),...
+    'VariableNames', variable_names);
+Error using table
+All table variables must have the same number of rows.
+ 
+>> a = nan(1,length(images_names));
+>> image_acc_table = table(images_names', nan(1,length(images_names)), nan(1,length(images_names)),...
+    'VariableNames', variable_names);
+>> 
+image_acc_table = table(images_names, nan(length(images_names), 1), nan(length(images_names),1),...
+    'VariableNames', variable_names);
+>> 
+    img_trial_mat = all_mat(strcmp(img_name, all_mat.image), :);
+Unrecognized function or variable 'img_name'.
+ 
+>> img_name = img_names{1]}
+ img_name = img_names{1]}
+                       ↑
+Invalid expression. When calling a function or indexing a variable, use
+parentheses. Otherwise, check for mismatched delimiters.
+ 
+>> img_name = img_names{1}
+Undefined variable 'img_names'.
+ 
+>> imgs_names = unique(all_mat.img);
+Error using  . 
+Unrecognized table variable name 'img'.
+ 
+>> 
+imgs_names = unique(all_mat.image);
+>> img_names = unique(all_mat.image);
+>> img_name = img_names{1}
+
+img_name =
+
+    'SHINEd_bathroom_practice1.tif'
+
+>> 
+    img_trial_mat = all_mat(strcmp(img_name, all_mat.image), :);
+>> 
+    img_acc_table.category{row} = img_trial_mat.category{1};
+Unrecognized function or variable 'row'.
+ 
+>> row = 1
+
+row =
+
+     1
+
+>> 
+    img_acc_table.category{row} = img_trial_mat.category{1};
+>> 
+% define column names
+variable_names = {'image_name', 'category', 'mean_acc'};
+
+% init table
+img_acc_table = table(img_names, nan(length(img_names), 1), nan(length(img_names),1),...
+    'VariableNames', variable_names);
+>> 
+    img_acc_table.category{row} = img_trial_mat.category{1};
+Error using  . 
+Unable to perform assignment because brace indexing is not supported for
+variables of this type.
+ 
+>> img_trial_mat.category{1};
+>> img_trial_mat.category{1}
+
+ans =
+
+    'bathroom'
+
+>> 
+    img_acc_table.category(row) = img_trial_mat.category{1};
+Error using  . 
+Unable to perform assignment because the left and right sides have a
+different number of elements.
+ 
+>> img_acc_table.category{row}
+Error using indexing
+Brace indexing is not supported for variables of this type.
+ 
+>> img_acc_table.category
+
+ans =
+
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+   NaN
+
+>> img_acc_table(1).category
+Error using indexing
+Subscripting into a table using one subscript (as in t(i)) is not supported.
+Specify a row subscript and a variable subscript, as in t(rows,vars). To
+select variables, use t(:,i) or for one variable t.(i). To select rows, use
+t(i,:).
+ 
+>> img_acc_table.category(1)
+
+ans =
+
+   NaN
+
+>> img_acc_table.category(1) = 12
+
+img_acc_table =
+
+  110×3 table
+
+               image_name                category    mean_acc
+    _________________________________    ________    ________
+
+    "SHINEd_bathroom_practice1.tif"         12         NaN   
+    "SHINEd_bathroom_practice2.tif"        NaN         NaN   
+    "SHINEd_bathroom_practice3.tif"        NaN         NaN   
+    "SHINEd_bathroom_practice4.tif"        NaN         NaN   
+    "SHINEd_bathroom_practice5.tif"        NaN         NaN   
+
+                    :                       :           :    
+
+    "SHINEd_sun_axxbkopsgyouuebh.tif"      NaN         NaN   
+    "SHINEd_sun_axyrejkiiaqiurjk.tif"      NaN         NaN   
+    "SHINEd_sun_axyyrmzcupyhlivc.tif"      NaN         NaN   
+    "SHINEd_sun_aypmqwcualkenuoe.tif"      NaN         NaN   
+    "SHINEd_sun_azqyogdvyhahyram.tif"      NaN         NaN   
+
+	Display all 110 rows.
+
+>> img_acc_table.category(1) = 'aefe'
+Error using  . 
+Unable to perform assignment because the left and right sides have a
+different number of elements.
+ 
+>> repmat('NaN',10,1)
+
+ans =
+
+  10×3 char array
+
+    'NaN'
+    'NaN'
+    'NaN'
+    'NaN'
+    'NaN'
+    'NaN'
+    'NaN'
+    'NaN'
+    'NaN'
+    'NaN'
+
+>> % define column names
+variable_names = {'image_name', 'category', 'mean_acc'};
+
+% init table
+img_acc_table = table(img_names, repmat('NaN',length(img_names),1), nan(length(img_names),1),...
+    'VariableNames', variable_names);
+>> img_acc_table.category(1) = 'aefe'
+Error using  . 
+Unable to perform assignment because the left and right sides have a
+different number of elements.
+ 
+>> img_acc_table.category(1)
+
+ans =
+
+    'N'
+
+>> img_acc_table.category{1}
+Error using indexing
+Brace indexing is not supported for variables of this type.
+ 
+>> % init table
+img_acc_table = table(img_names, repmat('empty',length(img_names),1), nan(length(img_names),1),...
+    'VariableNames', variable_names);
+>> variable_names = ["image_name", "category", "mean_acc"];
+
+% init table
+img_acc_table = table(img_names, repmat("empty",length(img_names),1), nan(length(img_names),1),...
+    'VariableNames', variable_names);
+>> 
+    img_acc_table.category{row} = img_trial_mat.category{1};
+>> % define column names
+variable_names = ["image_name", "category", "mean_acc", "repetitions"];
+
+% init table
+img_acc_table = table(img_names, repmat("empty",length(img_names),1), nan(length(img_names),1), nan(length(img_names),1),...
+    'VariableNames', variable_names);
+>> size(img_trial_mat)
+
+ans =
+
+     8    22
+
+>> size(img_trial_mat)(1)
+Error:  Invalid array indexing.
+ 
+>> height(img_trial_mat)
+
+ans =
+
+     8
+
+>> [all_mat, img_acc_table] = checkImgAcc([103,102,101]);
+Unrecognized function or variable 'rwo'.
+
+Error in checkImgAcc (line 60)
+    row = rwo + 1;
+ 
+>> [all_mat, img_acc_table] = checkImgAcc([103,102,101]);
+Error using strcmp
+Inputs must be the same size or either one can be a scalar.
+
+Error in checkImgAcc (line 62)
+    img_trial_mat = all_mat(strcmp(img_name, all_mat.image), :);
+ 
+>> [all_mat, img_acc_table] = checkImgAcc([103,102,101]);
+Unrecognized function or variable 'contain'.
+
+Error in checkImgAcc (line 63)
+    img_trial_mat = all_mat(contain( all_mat.image, img_name), :);
+ 
+>> [all_mat, img_acc_table] = checkImgAcc([103,102,101]);
+>> [all_mat, img_acc_table] = checkImgAcc([103,102,101]);
+58  row = 0;
+K>> img_names{2]}
+ img_names{2]}
+            ↑
+Invalid expression. When calling a function or indexing a variable, use
+parentheses. Otherwise, check for mismatched delimiters.
+ 
+K>> img_names{2}
+
+ans =
+
+    'SHINEd_bathroom_practice2.tif'
+
+>> [all_mat, img_acc_table] = checkImgAcc([103,102,101]);
+58  for row = 1: length(img_names)
+>> img_acc_table = sortrows(img_acc_table,'mean_acc','descend');
+>> all_mat = sortrows(all_mat,'image','ascend');
+>> img_acc_table = sortrows(img_acc_table,'image_name','ascend');
+>> img_acc_table = sortrows(img_acc_table,'mean_acc','ascend');
+>> mean(img_acc_table.mean_acc(strcmp(img_acc_table, 'kitchen')))
+
+ans =
+
+   NaN
+
+>> img_acc_table.mean_acc(strcmp(img_acc_table, 'kitchen'))
+
+ans =
+
+     []
+
+>> img_acc_table.mean_acc(strcmp(img_acc_table, "kitchen"))
+
+ans =
+
+     []
+
+>> strcmp(img_acc_table, "kitchen")
+
+ans =
+
+  logical
+
+   0
+
+>> mean(img_acc_table.mean_acc(strcmp(img_acc_table.category, "kitchen")))
+
+ans =
+
+    0.8703
+
+>> mean(img_acc_table.mean_acc(strcmp(img_acc_table.category, "bathroom")))
+
+ans =
+
+    0.7352
+
+>> img_acc_table = sortrows(img_acc_table,'mean_acc','descend');
+>> Run_wp4_beh
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (144, 144), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+Subject number [101-199, default: 101]: 105
+Session number [default: 1]: 
+Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
+WELCOME to initPsychtooblox
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (144, 144), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+
+
+PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
+PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
+PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
+PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
+PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
+
+PTB-INFO: For information about paid support, support memberships and other commercial services, please type
+PTB-INFO: 'PsychPaidSupportAndServices'.
+
+
+PTB-WARNING: Couldn't determine end-line of vertical blanking interval for your display! Trouble with beamposition queries?!?
+PTB-WARNING: Detected end-line is 1079, which is either lower or more than 1.250000 times higher than vbl startline 1620 --> Out of sane range!
+
+
+PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
+PTB-INFO: VBL startline = 1620 , VBL Endline = 1079
+PTB-INFO: Beamposition queries unsupported or defective on this system. Using basic timestamping as fallback.
+PTB-INFO: Timestamps returned by Screen('Flip') will be therefore less robust and accurate.
+PTB-INFO: Measured monitor refresh interval from VBLsync = 16.637182 ms [60.106333 Hz]. (50 valid samples taken, stddev=0.531071 ms.)
+PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
+PTB-INFO: Small deviations between reported values are normal and no reason to worry.
+PTB-INFO: ==============================================================================================================================
+PTB-INFO: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE. On this Windows-10 or later system, Psychtoolbox can no longer reliably detect if
+PTB-INFO: this will cause trouble for timing and integrity of visual stimuli or not. You might be just fine, or you could be in trouble.
+PTB-INFO: Use external measurement equipment and independent procedures to verify reliability of timing if you care about proper timing.
+PTB-INFO: ==============================================================================================================================
+
+WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
+
+
+----- ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
+
+One or more internal checks (see Warnings above) indicate that synchronization
+of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
+
+This will seriously impair proper stimulus presentation and stimulus presentation timing!
+Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
+You can force Psychtoolbox to continue, despite the severe problems, by adding the command
+Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
+
+
+
+
+----- ! PTB - WARNING: SYNCHRONIZATION TROUBLE ! -----
+
+One or more internal checks (see Warnings above) indicate that
+queries of rasterbeam position are not properly working for your setup.
+
+Psychtoolbox will work around this by using a different timing algorithm, 
+but it will cause Screen('Flip') to report less accurate/robust timestamps
+for stimulus timing.
+Read 'help BeampositionQueries' for more info and troubleshooting tips.
+
+
+
+WARNING: Failed to load GetCharJava Java class. Most likely your Matlab
+WARNING: classpath.txt file is not up to date. I will try to auto-fix this for
+WARNING: the current session by executing the PsychJavaTrouble() command.
+WARNING: This may have bad side-effects, like clearing all your scripts variables
+WARNING: and functions! If it works, please read 'help PsychJavaTrouble'
+WARNING: for a proper and permanent fix to the problem.
+
+PsychJavaTrouble: Will now try to add the PsychJava folder to Matlabs dynamic classpath...
+PsychJavaTrouble: Added PsychJava folder to dynamic class path. Psychtoolbox Java commands should work now!
+INFO: Problem may be fixed for this session. Let's see...
+INFO: Yep! Still, please fix the problem properly asap.
+WELCOME to loadStimuli
+WELCOME to loadMask
+
+
+PTB-INFO: There are still 224 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
+PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
+PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
+PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
+PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
+PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
+PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
+
+
+
+WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
+WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
+WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
+WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
+Not enough input arguments.
+
+Error in drawFixation (line 16)
+Screen('DrawLine', w, colorCross, cx-DIAMOUT_FIXATION/2*ppd, cy,cx+DIAMOUT_FIXATION/2*ppd, cy, DIAMIN_FIXATION*ppd);
+
+Error in showStimuli (line 30)
+drawFixation()
+
+Error in Run_wp4_beh (line 176)
+            blk_mat.stim_time(tr) = showStimuli(blk_mat.texture(tr));
+ 
+>> Run_wp4_beh
+Subject number [101-199, default: 101]: 104
+Session number [default: 1]: 
+Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
+
+WELCOME to initPsychtooblox
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (144, 144), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+
+
+PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
+PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
+PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
+PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
+PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
+
+PTB-INFO: For information about paid support, support memberships and other commercial services, please type
+PTB-INFO: 'PsychPaidSupportAndServices'.
+
+
+PTB-WARNING: Couldn't determine end-line of vertical blanking interval for your display! Trouble with beamposition queries?!?
+PTB-WARNING: Detected end-line is 1079, which is either lower or more than 1.250000 times higher than vbl startline 1620 --> Out of sane range!
+
+
+PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
+PTB-INFO: VBL startline = 1620 , VBL Endline = 1079
+PTB-INFO: Beamposition queries unsupported or defective on this system. Using basic timestamping as fallback.
+PTB-INFO: Timestamps returned by Screen('Flip') will be therefore less robust and accurate.
+PTB-INFO: Measured monitor refresh interval from VBLsync = 16.628620 ms [60.137281 Hz]. (50 valid samples taken, stddev=0.380028 ms.)
+PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
+PTB-INFO: Small deviations between reported values are normal and no reason to worry.
+PTB-INFO: ==============================================================================================================================
+PTB-INFO: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE. On this Windows-10 or later system, Psychtoolbox can no longer reliably detect if
+PTB-INFO: this will cause trouble for timing and integrity of visual stimuli or not. You might be just fine, or you could be in trouble.
+PTB-INFO: Use external measurement equipment and independent procedures to verify reliability of timing if you care about proper timing.
+PTB-INFO: ==============================================================================================================================
+
+WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
+
+
+----- ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
+
+One or more internal checks (see Warnings above) indicate that synchronization
+of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
+
+This will seriously impair proper stimulus presentation and stimulus presentation timing!
+Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
+You can force Psychtoolbox to continue, despite the severe problems, by adding the command
+Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
+
+
+
+
+----- ! PTB - WARNING: SYNCHRONIZATION TROUBLE ! -----
+
+One or more internal checks (see Warnings above) indicate that
+queries of rasterbeam position are not properly working for your setup.
+
+Psychtoolbox will work around this by using a different timing algorithm, 
+but it will cause Screen('Flip') to report less accurate/robust timestamps
+for stimulus timing.
+Read 'help BeampositionQueries' for more info and troubleshooting tips.
+
+
+WELCOME to loadStimuli
+WELCOME to loadMask
+
+
+PTB-INFO: There are still 224 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
+PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
+PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
+PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
+PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
+PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
+PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
+
+
+
+INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
+INFO: a total of 3 times out of a total of 11 flips during this session.
+
+INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
+INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
+INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
+INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
+INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
+INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
+
+
+
+WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
+WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
+WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
+WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
+Error using  () 
+Subscripting into a table using one subscript (as in t(i)) is not supported. Specify a row
+subscript and a variable subscript, as in t(rows,vars). To select variables, use t(:,i) or
+for one variable t.(i). To select rows, use t(i,:).
+
+Error in Run_wp4_beh (line 324)
+            acc_mat = compute_performance(blk_mat(blk_mat.trial == tr));
+ 
+>> Run_wp4_beh
+Subject number [101-199, default: 101]: 104
+Session number [default: 1]: 
+Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
+Warning: This participant number and session was already attributed! 
+> In Run_wp4_beh (line 54) 
+
+WELCOME to initPsychtooblox
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (144, 144), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+
+
+PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
+PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
+PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
+PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
+PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
+
+PTB-INFO: For information about paid support, support memberships and other commercial services, please type
+PTB-INFO: 'PsychPaidSupportAndServices'.
+
+
+PTB-WARNING: Couldn't determine end-line of vertical blanking interval for your display! Trouble with beamposition queries?!?
+PTB-WARNING: Detected end-line is 1079, which is either lower or more than 1.250000 times higher than vbl startline 1620 --> Out of sane range!
+
+
+PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
+PTB-INFO: VBL startline = 1620 , VBL Endline = 1079
+PTB-INFO: Beamposition queries unsupported or defective on this system. Using basic timestamping as fallback.
+PTB-INFO: Timestamps returned by Screen('Flip') will be therefore less robust and accurate.
+PTB-INFO: Measured monitor refresh interval from VBLsync = 16.619144 ms [60.171571 Hz]. (50 valid samples taken, stddev=0.350640 ms.)
+PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
+PTB-INFO: Small deviations between reported values are normal and no reason to worry.
+PTB-INFO: ==============================================================================================================================
+PTB-INFO: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE. On this Windows-10 or later system, Psychtoolbox can no longer reliably detect if
+PTB-INFO: this will cause trouble for timing and integrity of visual stimuli or not. You might be just fine, or you could be in trouble.
+PTB-INFO: Use external measurement equipment and independent procedures to verify reliability of timing if you care about proper timing.
+PTB-INFO: ==============================================================================================================================
+
+WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
+
+
+----- ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
+
+One or more internal checks (see Warnings above) indicate that synchronization
+of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
+
+This will seriously impair proper stimulus presentation and stimulus presentation timing!
+Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
+You can force Psychtoolbox to continue, despite the severe problems, by adding the command
+Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
+
+
+
+
+----- ! PTB - WARNING: SYNCHRONIZATION TROUBLE ! -----
+
+One or more internal checks (see Warnings above) indicate that
+queries of rasterbeam position are not properly working for your setup.
+
+Psychtoolbox will work around this by using a different timing algorithm, 
+but it will cause Screen('Flip') to report less accurate/robust timestamps
+for stimulus timing.
+Read 'help BeampositionQueries' for more info and troubleshooting tips.
+
+
+WELCOME to loadStimuli
+WELCOME to loadMask
+
+
+PTB-INFO: There are still 224 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
+PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
+PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
+PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
+PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
+PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
+PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
+
+
+
+INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
+INFO: a total of 4 times out of a total of 11 flips during this session.
+
+INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
+INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
+INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
+INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
+INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
+INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
+
+
+
+WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
+WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
+WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
+WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
+'compute_performance' is not found in the current folder or on the MATLAB path, but exists
+in:
+    C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität
+    Gießen\Dokumente\GitHub\pep_wp4\functions
+
+Change the MATLAB current folder or add its folder to the MATLAB path.
+
+Error in Run_wp4_beh (line 324)
+            acc_mat = compute_performance(blk_mat(blk_mat.trial == tr), :);
+ 
+>> Run_wp4_beh
+Subject number [101-199, default: 101]: 104
+Session number [default: 1]: 
+Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
+
+Warning: This participant number and session was already attributed! 
+> In Run_wp4_beh (line 54) 
+WELCOME to initPsychtooblox
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (144, 144), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+
+
+PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
+PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
+PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
+PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
+PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
+
+PTB-INFO: For information about paid support, support memberships and other commercial services, please type
+PTB-INFO: 'PsychPaidSupportAndServices'.
+
+
+PTB-WARNING: Couldn't determine end-line of vertical blanking interval for your display! Trouble with beamposition queries?!?
+PTB-WARNING: Detected end-line is 1079, which is either lower or more than 1.250000 times higher than vbl startline 1620 --> Out of sane range!
+
+
+PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
+PTB-INFO: VBL startline = 1620 , VBL Endline = 1079
+PTB-INFO: Beamposition queries unsupported or defective on this system. Using basic timestamping as fallback.
+PTB-INFO: Timestamps returned by Screen('Flip') will be therefore less robust and accurate.
+PTB-INFO: Measured monitor refresh interval from VBLsync = 16.632422 ms [60.123535 Hz]. (50 valid samples taken, stddev=0.392074 ms.)
+PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
+PTB-INFO: Small deviations between reported values are normal and no reason to worry.
+PTB-INFO: ==============================================================================================================================
+PTB-INFO: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE. On this Windows-10 or later system, Psychtoolbox can no longer reliably detect if
+PTB-INFO: this will cause trouble for timing and integrity of visual stimuli or not. You might be just fine, or you could be in trouble.
+PTB-INFO: Use external measurement equipment and independent procedures to verify reliability of timing if you care about proper timing.
+PTB-INFO: ==============================================================================================================================
+
+WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
+
+
+----- ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
+
+One or more internal checks (see Warnings above) indicate that synchronization
+of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
+
+This will seriously impair proper stimulus presentation and stimulus presentation timing!
+Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
+You can force Psychtoolbox to continue, despite the severe problems, by adding the command
+Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
+
+
+
+
+----- ! PTB - WARNING: SYNCHRONIZATION TROUBLE ! -----
+
+One or more internal checks (see Warnings above) indicate that
+queries of rasterbeam position are not properly working for your setup.
+
+Psychtoolbox will work around this by using a different timing algorithm, 
+but it will cause Screen('Flip') to report less accurate/robust timestamps
+for stimulus timing.
+Read 'help BeampositionQueries' for more info and troubleshooting tips.
+
+
+WELCOME to loadStimuli
+WELCOME to loadMask
+
+
+PTB-INFO: There are still 224 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
+PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
+PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
+PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
+PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
+PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
+PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
+
+
+
+INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
+INFO: a total of 2 times out of a total of 11 flips during this session.
+
+INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
+INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
+INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
+INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
+INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
+INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
+
+
+
+WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
+WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
+WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
+WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
+'compute_performance' is not found in the current folder or on the MATLAB path, but exists
+in:
+    C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität
+    Gießen\Dokumente\GitHub\pep_wp4\functions
+
+Change the MATLAB current folder or add its folder to the MATLAB path.
+
+Error in Run_wp4_beh (line 324)
+            acc_mat = compute_performance(blk_mat(blk_mat.trial == tr), :);
+ 
+>> addpath 'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\GitHub\pep_wp4\functions'
+>> function_folder
+
+function_folder =
+
+    'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\GitHub\pep_wp4\functions\'
+
+>> addpath(function_folder)
+>> Run_wp4_beh
+Subject number [101-199, default: 101]: 104
+Session number [default: 1]: 
+Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
+Warning: This participant number and session was already attributed! 
+> In Run_wp4_beh (line 54) 
+WELCOME to initPsychtooblox
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (144, 144), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+
+
+PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
+PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
+PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
+PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
+PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
+
+PTB-INFO: For information about paid support, support memberships and other commercial services, please type
+PTB-INFO: 'PsychPaidSupportAndServices'.
+
+
+PTB-WARNING: Couldn't determine end-line of vertical blanking interval for your display! Trouble with beamposition queries?!?
+PTB-WARNING: Detected end-line is 1079, which is either lower or more than 1.250000 times higher than vbl startline 1620 --> Out of sane range!
+
+
+PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
+PTB-INFO: VBL startline = 1620 , VBL Endline = 1079
+PTB-INFO: Beamposition queries unsupported or defective on this system. Using basic timestamping as fallback.
+PTB-INFO: Timestamps returned by Screen('Flip') will be therefore less robust and accurate.
+PTB-INFO: Measured monitor refresh interval from VBLsync = 16.690320 ms [59.914969 Hz]. (50 valid samples taken, stddev=0.252374 ms.)
+PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
+PTB-INFO: Small deviations between reported values are normal and no reason to worry.
+PTB-INFO: ==============================================================================================================================
+PTB-INFO: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE. On this Windows-10 or later system, Psychtoolbox can no longer reliably detect if
+PTB-INFO: this will cause trouble for timing and integrity of visual stimuli or not. You might be just fine, or you could be in trouble.
+PTB-INFO: Use external measurement equipment and independent procedures to verify reliability of timing if you care about proper timing.
+PTB-INFO: ==============================================================================================================================
+
+WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
+
+
+----- ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
+
+One or more internal checks (see Warnings above) indicate that synchronization
+of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
+
+This will seriously impair proper stimulus presentation and stimulus presentation timing!
+Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
+You can force Psychtoolbox to continue, despite the severe problems, by adding the command
+Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
+
+
+
+
+----- ! PTB - WARNING: SYNCHRONIZATION TROUBLE ! -----
+
+One or more internal checks (see Warnings above) indicate that
+queries of rasterbeam position are not properly working for your setup.
+
+Psychtoolbox will work around this by using a different timing algorithm, 
+but it will cause Screen('Flip') to report less accurate/robust timestamps
+for stimulus timing.
+Read 'help BeampositionQueries' for more info and troubleshooting tips.
+
+
+WELCOME to loadStimuli
+WELCOME to loadMask
+

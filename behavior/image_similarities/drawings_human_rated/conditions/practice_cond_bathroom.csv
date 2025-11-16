@@ -1,0 +1,11 @@
+sub1;sub2;pairID;trialID;stim1;stim2
+110;133;practice;1;stimuli/own/bathroom/110_bat.jpg;stimuli/own/bathroom/133_bat.jpg
+110;128;practice;2;stimuli/own/bathroom/110_bat.jpg;stimuli/own/bathroom/128_bat.jpg
+128;108;practice;3;stimuli/own/bathroom/128_bat.jpg;stimuli/own/bathroom/108_bat.jpg
+110;107;practice;4;stimuli/own/bathroom/110_bat.jpg;stimuli/own/bathroom/107_bat.jpg
+107;108;practice;5;stimuli/own/bathroom/107_bat.jpg;stimuli/own/bathroom/108_bat.jpg
+128;133;practice;6;stimuli/own/bathroom/128_bat.jpg;stimuli/own/bathroom/133_bat.jpg
+107;128;practice;7;stimuli/own/bathroom/107_bat.jpg;stimuli/own/bathroom/128_bat.jpg
+108;110;practice;8;stimuli/own/bathroom/108_bat.jpg;stimuli/own/bathroom/110_bat.jpg
+107;133;practice;9;stimuli/own/bathroom/107_bat.jpg;stimuli/own/bathroom/133_bat.jpg
+108;133;practice;10;stimuli/own/bathroom/108_bat.jpg;stimuli/own/bathroom/133_bat.jpg

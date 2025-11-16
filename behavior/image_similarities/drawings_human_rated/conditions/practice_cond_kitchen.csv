@@ -1,0 +1,11 @@
+sub1;sub2;pairID;trialID;stim1;stim2
+110;133;practice;1;stimuli/own/kitchen/110_kit.jpg;stimuli/own/kitchen/133_kit.jpg
+110;128;practice;2;stimuli/own/kitchen/110_kit.jpg;stimuli/own/kitchen/128_kit.jpg
+128;108;practice;3;stimuli/own/kitchen/128_kit.jpg;stimuli/own/kitchen/108_kit.jpg
+110;107;practice;4;stimuli/own/kitchen/110_kit.jpg;stimuli/own/kitchen/107_kit.jpg
+107;108;practice;5;stimuli/own/kitchen/107_kit.jpg;stimuli/own/kitchen/108_kit.jpg
+128;133;practice;6;stimuli/own/kitchen/128_kit.jpg;stimuli/own/kitchen/133_kit.jpg
+107;128;practice;7;stimuli/own/kitchen/107_kit.jpg;stimuli/own/kitchen/128_kit.jpg
+108;110;practice;8;stimuli/own/kitchen/108_kit.jpg;stimuli/own/kitchen/110_kit.jpg
+107;133;practice;9;stimuli/own/kitchen/107_kit.jpg;stimuli/own/kitchen/133_kit.jpg
+108;133;practice;10;stimuli/own/kitchen/108_kit.jpg;stimuli/own/kitchen/133_kit.jpg

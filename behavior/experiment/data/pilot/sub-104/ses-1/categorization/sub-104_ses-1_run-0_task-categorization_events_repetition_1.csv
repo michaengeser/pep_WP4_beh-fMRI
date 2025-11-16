@@ -1,0 +1,11 @@
+sub_num,trial,block,task,is_practice,category,image,texture,duration,blank,mask_dur,jitter,stim_time,time_of_resp,trial_response,blank_time,mask_time,fix_time,jit_onset,trial_end,trial_accuracy,RT
+104,1,0,categorization,1,bathroom,SHINEd_bathroom_practice1.tif,111,0.0333333333333333,0.0333333333333333,0.0833333333333333,1.28333333333333,524818.9060677,524822.1684279,74,524818.9457396,524818.9808412,524819.0626688,NaN,NaN,NaN,NaN
+104,2,0,categorization,1,bathroom,SHINEd_bathroom_practice2.tif,112,0.0333333333333333,0.0333333333333333,0.0833333333333333,0.766666666666667,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN
+104,3,0,categorization,1,bathroom,SHINEd_bathroom_practice3.tif,113,0.0333333333333333,0.0333333333333333,0.0833333333333333,1.83333333333333,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN
+104,4,0,categorization,1,bathroom,SHINEd_bathroom_practice4.tif,114,0.0333333333333333,0.0333333333333333,0.0833333333333333,1.45,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN
+104,5,0,categorization,1,bathroom,SHINEd_bathroom_practice5.tif,115,0.0333333333333333,0.0333333333333333,0.0833333333333333,1.88333333333333,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN
+104,6,0,categorization,1,kitchen,SHINEd_kitchen_practice1.tif,116,0.0333333333333333,0.0333333333333333,0.0833333333333333,0.8,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN
+104,7,0,categorization,1,kitchen,SHINEd_kitchen_practice2.tif,117,0.0333333333333333,0.0333333333333333,0.0833333333333333,1,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN
+104,8,0,categorization,1,kitchen,SHINEd_kitchen_practice3.tif,118,0.0333333333333333,0.0333333333333333,0.0833333333333333,1.2,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN
+104,9,0,categorization,1,kitchen,SHINEd_kitchen_practice4.tif,119,0.0333333333333333,0.0333333333333333,0.0833333333333333,1.86666666666667,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN
+104,10,0,categorization,1,kitchen,SHINEd_kitchen_practice5.tif,120,0.0333333333333333,0.0333333333333333,0.0833333333333333,1.7,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN

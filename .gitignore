@@ -1,11 +1,17 @@
 
-/vgg16_imagenet
-/vgg16_places365
 *.asv
-/ISCtoolbox
-/photos
-/derivatives/sub-*/func/wrsub-*xxxx_task-scenes_run-*_bold.nii
-/sourcedata/sub-*/anat/*.nii
-/sourcedata/sub-*/func/*.nii
-/derivatives/sub-*/func/*.nii
-/sourcedata/**/.import
+
+fMRI/vgg16_imagenet
+fMRI/vgg16_places365
+fMRI/ISCtoolbox
+fMRI/photos
+fMRI/derivatives/sub-*/func/wrsub-*xxxx_task-scenes_run-*_bold.nii
+fMRI/sourcedata/sub-*/anat/*.nii
+fMRI/sourcedata/sub-*/func/*.nii
+fMRI/derivatives/sub-*/func/*.nii
+fMRI/sourcedata/**/.import
+
+behavior/image_similarities/pictures
+behavior/analysis/vgg16_imagenet
+behavior/analysis/vgg16_places365
+behavior/analysis/figures/

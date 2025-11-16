@@ -1,0 +1,208 @@
+
+PsychStartup: Adding path of installed GStreamer runtime to library path. [C:\gstreamer\1.0\msvc_x86_64\bin]
+>>         wait_resp = 0;
+        while wait_resp ~= spaceBar
+            [~, ~, wait_resp] = KbCheck();
+        end
+Unrecognized function or variable 'spaceBar'.
+ 
+>> %% Response params
+KbName('UnifyKeyNames');
+CalibrationKey= KbName('C');
+upKey         =  KbName('UpArrow');
+downKey       =  KbName('DownArrow');
+RightKey      =  KbName('RightArrow');
+LeftKey       =  KbName('LeftArrow');
+PauseKey      =  KbName('Q');
+RestartKey    =  KbName('R');
+abortKey      =  KbName('ESCAPE'); % ESC aborts experiment
+YesKey        =  KbName('Y');
+F_Key         =  KbName('F');
+J_Key         =  KbName('J');
+spaceBar      =  KbName('SPACE');
+oneKey        =  KbName('1!');
+twoKey        =  KbName('2@');
+threeKey      =  KbName('3#');
+fourKey       =  KbName('4$');
+fiveKey       =  KbName('5%');
+sixKey        =  KbName('6^');
+sevenKey      =  KbName('7&');
+eightKey      =  KbName('8*');
+ValidationKey = KbName('V');
+>>        % wait for response
+        wait_resp = 0;
+        while wait_resp ~= spaceBar
+            [~, ~, wait_resp] = KbCheck();
+        end
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (144, 144), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+Operation terminated by user during KbCheck
+ 
+      
+>> Run_wp4_beh
+Subject number [101-199, default: 101]: 
+Operation terminated by user during Run_wp4_beh
+ 
+
+>>         wait_resp = 0;
+        while wait_resp ~= spaceBar
+            [~, ~, wait_resp] = KbCheck();
+        end
+>> %% Response params
+KbName('UnifyKeyNames');
+CalibrationKey= KbName('C');
+upKey         =  KbName('UpArrow');
+downKey       =  KbName('DownArrow');
+RightKey      =  KbName('RightArrow');
+LeftKey       =  KbName('LeftArrow');
+PauseKey      =  KbName('Q');
+RestartKey    =  KbName('R');
+abortKey      =  KbName('ESCAPE'); % ESC aborts experiment
+YesKey        =  KbName('Y');
+F_Key         =  KbName('F');
+J_Key         =  KbName('J');
+spaceBar      =  KbName('SPACE');
+oneKey        =  KbName('1!');
+twoKey        =  KbName('2@');
+threeKey      =  KbName('3#');
+fourKey       =  KbName('4$');
+fiveKey       =  KbName('5%');
+sixKey        =  KbName('6^');
+sevenKey      =  KbName('7&');
+eightKey      =  KbName('8*');
+ValidationKey = KbName('V');
+>>         wait_resp = 0;
+        while wait_resp ~= spaceBar
+            [~, ~, wait_resp] = KbCheck();
+        end
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (144, 144), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+Operation terminated by user during KbCheck
+ 
+                                                                       
+>>         % wait for response
+        wait_resp = 0;
+        while ~wait_resp(spaceBar)
+            [~, ~, wait_resp] = KbCheck();
+        end
+Index exceeds the number of array elements. Index must not exceed 1.
+ 
+>> wait_resp(spaceBar)
+Index exceeds the number of array elements. Index must not exceed 1.
+ 
+>>         % wait for response
+        [~, ~, wait_resp] = KbCheck();
+        while ~wait_resp(spaceBar)
+            [~, ~, wait_resp] = KbCheck();
+        end
+>>         % wait for space bar
+        [~, ~, wait_resp] = KbCheck();
+        while ~wait_resp(spaceBar)
+            [~, ~, wait_resp] = KbCheck();
+        end
+>> Run_wp4_beh
+Subject number [101-199, default: 101]: 
+Session number [default: 1]: 104
+Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
+WELCOME to initPsychtooblox
+
+PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
+PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
+PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
+
+PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
+PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
+PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (144, 144), matching that of
+PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
+PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
+PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+
+
+PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
+PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
+PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
+PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
+PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
+
+PTB-INFO: For information about paid support, support memberships and other commercial services, please type
+PTB-INFO: 'PsychPaidSupportAndServices'.
+
+
+PTB-WARNING: Couldn't determine end-line of vertical blanking interval for your display! Trouble with beamposition queries?!?
+PTB-WARNING: Detected end-line is 1079, which is either lower or more than 1.250000 times higher than vbl startline 1620 --> Out of sane range!
+
+
+PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
+PTB-INFO: VBL startline = 1620 , VBL Endline = 1079
+PTB-INFO: Beamposition queries unsupported or defective on this system. Using basic timestamping as fallback.
+PTB-INFO: Timestamps returned by Screen('Flip') will be therefore less robust and accurate.
+PTB-INFO: Measured monitor refresh interval from VBLsync = 16.660838 ms [60.020989 Hz]. (60 valid samples taken, stddev=1.267155 ms.)
+PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
+PTB-INFO: Small deviations between reported values are normal and no reason to worry.
+PTB-INFO: ==============================================================================================================================
+PTB-INFO: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE. On this Windows-10 or later system, Psychtoolbox can no longer reliably detect if
+PTB-INFO: this will cause trouble for timing and integrity of visual stimuli or not. You might be just fine, or you could be in trouble.
+PTB-INFO: Use external measurement equipment and independent procedures to verify reliability of timing if you care about proper timing.
+PTB-INFO: ==============================================================================================================================
+
+WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
+
+
+----- ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
+
+One or more internal checks (see Warnings above) indicate that synchronization
+of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
+
+This will seriously impair proper stimulus presentation and stimulus presentation timing!
+Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
+You can force Psychtoolbox to continue, despite the severe problems, by adding the command
+Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
+
+
+
+
+----- ! PTB - WARNING: SYNCHRONIZATION TROUBLE ! -----
+
+One or more internal checks (see Warnings above) indicate that
+queries of rasterbeam position are not properly working for your setup.
+
+Psychtoolbox will work around this by using a different timing algorithm, 
+but it will cause Screen('Flip') to report less accurate/robust timestamps
+for stimulus timing.
+Read 'help BeampositionQueries' for more info and troubleshooting tips.
+
+
+
+WARNING: Failed to load GetCharJava Java class. Most likely your Matlab
+WARNING: classpath.txt file is not up to date. I will try to auto-fix this for
+WARNING: the current session by executing the PsychJavaTrouble() command.
+WARNING: This may have bad side-effects, like clearing all your scripts variables
+WARNING: and functions! If it works, please read 'help PsychJavaTrouble'
+WARNING: for a proper and permanent fix to the problem.
+
+PsychJavaTrouble: Will now try to add the PsychJava folder to Matlabs dynamic classpath...
+PsychJavaTrouble: Added PsychJava folder to dynamic class path. Psychtoolbox Java commands should work now!
+INFO: Problem may be fixed for this session. Let's see...
+INFO: Yep! Still, please fix the problem properly asap.
+WELCOME to loadStimuli
+WELCOME to loadMask
+
