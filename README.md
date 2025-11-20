@@ -5,20 +5,37 @@ This repository contains the code and data for the behavioural component of the 
 
 It includes experimental code, behavioural data analysis scripts, and materials for studying how individual differences in world models shape scene perception.
 
-## Data
-Large model files (e.g., VGG16 network and NIfTI files containing fMRI data) are available on [OSF](https://osf.io/zjtwx/).
-Download and place them in the appropriate folder.
+## Additional Data Links
+Download and place the data files in the appropriate folder (see below for folder structure).
 
-Basic structure 
+VGG16 network files are available on [OSF](https://osf.io/zjtwx/).
+
+Functional and anatomical sourcedata files can be found here: >data not uploaded yet< (no raw anatomical scans are shared to protect participants' privacy)
+
+Preprocessed files of task runs are stored here: >data not uploaded yet< (unzip and put in fMRI/derivatives folder)
+
+Preprocessed files of localizer runs are stored here: >data not uploaded yet< (unzip and put in fMRI/derivatives folder)
+
+
+
+## Basic structure 
 pep_wp4_beh-fMRI/
 
 │
 
-├── fMRI
+├── **fMRI** (contains code for fMRI experiment and analysis)
 
 │ ├── code
 
-│ ├── derivatives
+│ │ ├── analysisPipeline.mlx (main analysis script for fMRI experiment)
+
+│ │ ├── run_experiment_fMRI.m (experiment script)
+
+│ │ └── utilities
+
+│ │ 
+
+│ ├── derivatives (unzip and place downloaded preprocessed files here!)
 
 │ ├── drawings
 
@@ -26,21 +43,21 @@ pep_wp4_beh-fMRI/
 
 │ ├── MNI_ROIs
 
-│ ├── photos
+│ ├── photos (private photos are not shared, but IS-RDM is provided to replicate analysis)
 
-│ ├── sourcedata
+│ ├── sourcedata (unzip and place downloaded raw files here!)
 
 │ ├── stimuli
 
-│ ├── vgg16_imagenet
+│ ├── vgg16_imagenet (put vgg16_imagenet model from OSF here)
 
-│ └── vgg16_places265
+│ └── vgg16_places265 (put vgg16_places265 model from OSF here)
 
 │
 
-├── behavior
+├── **behavior** (contains code for behavioral experiment and analysis)
 
-│ ├── experiment/ # Behavioural experiments (Matlab + Psychtoolbox)
+│ ├── experiment
 
 │ │ ├── data
 
@@ -56,17 +73,17 @@ pep_wp4_beh-fMRI/
 
 │ │ 
 
-│ ├── analysis/ # Data analysis scripts (Matlab, R, Python)
+│ ├── analysis
 
 │ │ ├── functions
 
-│ │ ├── vgg16_imagenet
+│ │ ├── vgg16_imagenet (put vgg16_imagenet model from OSF here)
 
-│ │ ├── vgg16_places265
+│ │ ├── vgg16_places265 (put vgg16_places265 model from OSF here)
 
-│ │ ├── analysis_script_exp1.mlx
+│ │ ├── analysis_script_exp1.mlx (main analysis script for first behavioral experiment)
 
-│ │ └── analysis_script_exp2.mlx
+│ │ └── analysis_script_exp2.mlx (main analysis script for second behavioral experiment)
 
 │ │ 
 
@@ -76,23 +93,16 @@ pep_wp4_beh-fMRI/
 
 │ │ ├── drawings_human_rated
 
-│ │ └── pictures
+│ │ └── pictures (private photos are not shared, but IS-RDM is provided to replicate analysis)
 
 │
 
-└── README.md
+└── **README.md**
 
+The scripts to run the experiments are implemented in MATLAB and Psychtoolbox-3.
+Most analysis is also coded in MATLAB, but R is used for linear mixed-effects (LME) modelling and Python for CLIP and DINO feature extraction.
 
-
-[...]
-
-Under experiment, you can find the code and stimuli for the behavioural experiments, including the categorization tasks (Experiments 1 and 2) and the rating task (Experiment 1). The experiments are implemented in MATLAB using Psychtoolbox-3.
-
-Under analysis, you can find the code for the data analysis. Each experiment has a dedicated live script that controls the analysis and calls the respective functions from the functions folder.
-For the analysis of image similarity using deep neural networks (DNNs), please download the required DNN files from OSF (https://osf.io/zjtwx/) and place them in the appropriate folder. The analysis is primarily conducted in MATLAB, with R used for linear mixed-effects (LME) modelling and Python for CLIP and DINO feature extraction.
-
-Under image_similarities, you can find the participant drawings and the corresponding photorealistic images created from these drawings.
-This folder also contains the code for the behavioural drawing similarity rating experiment, implemented in PsychoPy.
+To reproduce the analysis, download the respective data (see above) and run the MATLAB live scripts (.mlx). These are markdown scripts that should be self-explanatory. If anything is unclear, please contact me.
 
 ## Citation
 If you use this repository, please cite:
@@ -105,20 +115,3 @@ For questions or collaboration:
 - **Email:** michaengeser[at]gmail.com
 
 
-
-
-
-
-
-Code and Data will be added here in a user-friendly repository combining all code of the study
-
-## In the meantime check out repos of project parts
-https://github.com/michaengeser/pep_wp4 - for behavioural study
-
-https://github.com/michaengeser/pep_wp4_fMRI - for fMRI study
-
-
-## Contact
-For questions or collaboration:
-- **Lead author:**  Micha Engeser
-- **Email:** michaengeser[at]gmail.com
