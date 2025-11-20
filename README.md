@@ -87,11 +87,11 @@ pep_wp4_beh-fMRI/
 
 │ │ 
 
-│ ├──image_similarities/ # Drawings and generated photorealistic images
+│ ├──image_similarities
 
-│ │ ├── drawings_draw3D
+│ │ ├── drawings_draw3D (generated images)
 
-│ │ ├── drawings_human_rated
+│ │ ├── drawings_human_rated (raw drawings and script for human rating experiment)
 
 │ │ └── pictures (private photos are not shared, but IS-RDM is provided to replicate analysis)
 
