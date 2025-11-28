@@ -1,117 +1,151 @@
-# Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes.
+# Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes
 
-This repository contains the code and data for the behavioural component of the paper:
-**Engeser & Kaiser (2025). Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes.**
+This repository contains the code and data for the behavioral component of the paper:
 
-It includes experimental code, behavioural data analysis scripts, and materials for studying how individual differences in world models shape scene perception.
+## Engeser & Kaiser (2025). Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes.
+
+It includes experimental code, behavioral analysis scripts, and materials for investigating how individual differences in world models influence scene perception.
+
 
 ## Additional Data Links
-Download and place the data files in the appropriate folder (see below for folder structure).
 
-VGG16 network files are available on [OSF](https://osf.io/zjtwx/).
+Some large files are hosted externally and must be downloaded separately.
 
-Functional and anatomical sourcedata files can be found here: >data not uploaded yet< (no raw anatomical scans are shared to protect participants' privacy)
+VGG16 network files: available on OSF → https://osf.io/zjtwx/
 
-Preprocessed files of task runs are stored here: >data not uploaded yet< (unzip and put in fMRI/derivatives folder)
+Functional and anatomical sourcedata files: data not uploaded yet
+(Raw anatomical scans are not shared to protect participant privacy.)
 
-Preprocessed files of localizer runs are stored here: >data not uploaded yet< (unzip and put in fMRI/derivatives folder)
+Preprocessed task-run files: data not uploaded yet
+(Unzip and place in the fMRI/derivatives folder.)
+
+Preprocessed localizer-run files: data not uploaded yet
+(Unzip and place in the fMRI/derivatives folder.)
 
 
+To reproduce the figures from the paper, the intermediate files included in this repository are sufficient.
+Download the fMRI data only if you wish to reproduce the full preprocessing or time-course extraction. Corresponding code is included in the repository.
 
-## Basic structure 
+
+## Repository Structure
+
 pep_wp4_beh-fMRI/
 
 │
 
-├── **fMRI** (contains code for fMRI experiment and analysis)
+├── fMRI/                     # fMRI experiment + analysis code
 
-│ ├── code
+│   ├── code/
 
-│ │ ├── analysisPipeline.mlx (main analysis script for fMRI experiment)
+│   │   ├── analysisPipeline.mlx     # Main analysis script (fMRI)
 
-│ │ ├── run_experiment_fMRI.m (experiment script)
+│   │   ├── run_experiment_fMRI.m    # fMRI experiment script
 
-│ │ └── utilities
+│   │   └── utilities/
 
-│ │ 
+│   │
 
-│ ├── derivatives (unzip and place downloaded preprocessed files here!)
+│   ├── derivatives/          # Place preprocessed files here (after unzipping)
 
-│ ├── drawings
+│   ├── drawings/
 
-│ ├── localizer
+│   ├── localizer/
 
-│ ├── MNI_ROIs
+│   ├── MNI_ROIs/
 
-│ ├── photos (private photos are not shared, but IS-RDM is provided to replicate analysis)
+│   ├── photos/               # Private photos not shared; IS-RDM included
 
-│ ├── sourcedata (unzip and place downloaded raw files here!)
+│   ├── sourcedata/           # Place raw data here (after unzipping)
 
-│ ├── stimuli
+│   ├── stimuli/
 
-│ ├── vgg16_imagenet (put vgg16_imagenet model from OSF here)
+│   ├── vgg16_imagenet/       # Add VGG16 ImageNet model from OSF
 
-│ └── vgg16_places265 (put vgg16_places265 model from OSF here)
-
-│
-
-├── **behavior** (contains code for behavioral experiment and analysis)
-
-│ ├── experiment
-
-│ │ ├── data
-
-│ │ ├── functions
-
-│ │ ├── instructions
-
-│ │ ├── stimuli
-
-│ │ ├── trial_matrices
-
-│ │ └── Run_wp4_beh.m
-
-│ │ 
-
-│ ├── analysis
-
-│ │ ├── functions
-
-│ │ ├── vgg16_imagenet (put vgg16_imagenet model from OSF here)
-
-│ │ ├── vgg16_places265 (put vgg16_places265 model from OSF here)
-
-│ │ ├── analysis_script_exp1.mlx (main analysis script for first behavioral experiment)
-
-│ │ └── analysis_script_exp2.mlx (main analysis script for second behavioral experiment)
-
-│ │ 
-
-│ ├──image_similarities
-
-│ │ ├── drawings_draw3D (generated images)
-
-│ │ ├── drawings_human_rated (raw drawings and script for human rating experiment)
-
-│ │ └── pictures (private photos are not shared, but IS-RDM is provided to replicate analysis)
+│   └── vgg16_places265/      # Add VGG16 Places model from OSF
 
 │
 
-└── **README.md**
+├── behavior/                 # Behavioral experiment + analysis code
 
-The scripts to run the experiments are implemented in MATLAB and Psychtoolbox-3.
-Most analysis is also coded in MATLAB, but R is used for linear mixed-effects (LME) modelling and Python for CLIP and DINO feature extraction.
+│   ├── experiment/
 
-To reproduce the analysis, download the respective data (see above) and run the MATLAB live scripts (.mlx). These are markdown scripts that should be self-explanatory. If anything is unclear, please contact me.
+│   │   ├── data/
+
+│   │   ├── functions/
+
+│   │   ├── instructions/
+
+│   │   ├── stimuli/
+
+│   │   ├── trial_matrices/
+
+│   │   └── Run_wp4_beh.m
+
+│   │
+
+│   ├── analysis/
+
+│   │   ├── functions/
+
+│   │   ├── vgg16_imagenet/       # Add VGG16 ImageNet model from OSF
+
+│   │   ├── vgg16_places265/      # Add VGG16 Places model from OSF
+
+│   │   ├── analysis_script_exp1.mlx   # Analysis for Experiment 1
+
+│   │   └── analysis_script_exp2.mlx   # Analysis for Experiment 2
+
+│   │
+
+│   └── image_similarities/
+
+│       ├── drawings_draw3D/        # Generated images
+
+│       ├── drawings_human_rated/   # Raw drawings + human rating script
+
+│       └── pictures/               # Private images not shared; IS-RDM included
+
+│
+
+└── README.md
+
+
+## How to Use This Repository
+### Experiments 
+(The behavioral and fMRI experiments are implemented in MATLAB with Psychtoolbox-3). 
+
+Run_wp4_beh.m for the behavioral experiment
+
+run_experiment_fMRI.m for the fMRI experiment
+
+
+
+
+### Analysis
+(Most analyses are implemented in MATLAB, with R for linear mixed-effects (LME) modeling Python for CLIP and DINO feature extraction).
+
+To reproduce the analyses:
+
+Download the required data (see links above) and place files in the indicated folders.
+
+Run the MATLAB live scripts (.mlx), which include step-by-step explanations.
+
+If anything is unclear, feel free to contact me.
+
+
 
 ## Citation
+
 If you use this repository, please cite:
 
-Engeser, L., & Kaiser, D. (2025). *Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes.*
+Engeser, L., & Kaiser, D. (2025). Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes.
+
+
 
 ## Contact
-For questions or collaboration:
-- **Lead author:**  Micha Engeser
-- **Email:** michaengeser[at]gmail.com
 
+For questions or collaborations:
 
+Lead author: Micha Engeser
+
+Email: michaengeser[at]gmail.com
