@@ -13,13 +13,13 @@ Some large files are hosted externally and must be downloaded separately.
 
 VGG16 network files: available on OSF → https://osf.io/zjtwx/
 
-Functional and anatomical sourcedata files: data not uploaded yet
+Functional and anatomical sourcedata files: https://zenodo.org/records/17653128
 (Raw anatomical scans are not shared to protect participant privacy.)
 
-Preprocessed task-run files: data not uploaded yet
+Preprocessed task-run files: https://zenodo.org/records/17661600
 (Unzip and place in the fMRI/derivatives folder.)
 
-Preprocessed localizer-run files: data not uploaded yet
+Preprocessed localizer-run files: https://zenodo.org/records/17701429
 (Unzip and place in the fMRI/derivatives folder.)
 
 
