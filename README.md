@@ -2,7 +2,7 @@
 
 This repository contains the code and data of the paper:
 
-### Engeser & Kaiser (2025). Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes.
+### Engeser & Kaiser (2025). Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes. (Preprint: https://doi.org/10.31234/osf.io/hd6je_v1)
 
 It includes experimental code, behavioral analysis scripts, and materials for investigating how individual differences in world models influence scene perception.
 
