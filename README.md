@@ -4,29 +4,24 @@ This repository contains the code and data of the paper:
 
 ### Engeser & Kaiser (2025). Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes. (Preprint: https://doi.org/10.31234/osf.io/hd6je_v1)
 
-It includes experimental code, behavioral analysis scripts, and materials for investigating how individual differences in world models influence scene perception.
-
+It includes the experimental code as well as the analysis scripts and materials for the inter-subject representational similarity analysis.
 
 ## Installation 
-Download or clone the repository (~7GB without fMRI data). Download VGG16 network files (https://osf.io/zjtwx/) and place in folders named accordingly. 
+Download or clone the repository (~7GB without fMRI data). Download VGG16 network files (https://osf.io/zjtwx/) and place them in the folders named accordingly. 
 
-To reproduce the figures from the paper, the intermediate files included in this repository are sufficient.
+To reproduce the outouts from the paper, the intermediate files included in this repository are sufficient.
 Download the fMRI data only if you wish to reproduce the full preprocessing or time-course extraction. Corresponding code is included in the repository.
 
-Download and installation should take <30 min. on a "normal" computer.
+Download and installation should take <30 min. on a "normal" computer (without fMRI data).
 
 The code is mostly written in Matlab (R2022a) on Windows 11. Installation on other operating systems might need minor adjustments.
 
-Additionally install the following software dependencies:
-Psychtoolbox (3.0.19) for the experiment code
-SPM12 for fMRI analysis
-
+Additionally install the following software dependencies: Psychtoolbox (3.0.19) for running the experiment and SPM12 for fMRI analysis
 
 ## Demo
-As a demo you can run the analysis live script of the second experiment (pep_WP4_beh-fMRI\behavior\analysis\analysis_script_exp2.mlx). This contains the core steps of the inter-subject RSA framework applied in the current study, including building IS-RDMs of drawings and task performance, compring the IS-RDMs and statistical tests. More detailed information on runing the code can be found in the markdown sections of the live script.
+As a demo you can run the analysis live script of the second experiment (pep_WP4_beh-fMRI\behavior\analysis\analysis_script_exp2.mlx). This contains the core steps of the inter-subject RSA framework, including building IS-RDMs of the drawings and task performance, comparing the IS-RDMs and statistical testing. More detailed information on runing the code can be found in the markdown sections of the live script.
 
 The demo should take <10 min. on a "normal" computer.
-
 
 ## Data links
 Some large files are hosted externally and must be downloaded separately.
@@ -34,15 +29,13 @@ Some large files are hosted externally and must be downloaded separately.
 VGG16 network files: available on OSF → https://osf.io/zjtwx/
 
 Functional and anatomical sourcedata files: https://zenodo.org/records/17653128
-(Raw anatomical scans are not shared to protect participant privacy.)
+(Unzip and place in the fMRI/sourcedata folder. Raw anatomical scans are not shared to protect participant privacy.)
 
 Preprocessed task-run files: https://zenodo.org/records/17661600
 (Unzip and place in the fMRI/derivatives folder.)
 
 Preprocessed localizer-run files: https://zenodo.org/records/17701429
 (Unzip and place in the fMRI/derivatives folder.)
-
-
 
 
 ## Repository Structure
@@ -128,7 +121,6 @@ pep_wp4_beh-fMRI/
 └── README.md
 
 
-## How to Use This Repository
 ### Experiments 
 The behavioral and fMRI experiments are implemented in MATLAB (R2022a - 9.12.0.2327980) with Psychtoolbox (3.0.19).
 
@@ -137,22 +129,16 @@ Run_wp4_beh.m for the behavioral experiment
 run_experiment_fMRI.m for the fMRI experiment
 
 
-
-
 ### Analysis
 Most analyses are implemented in MATLAB (R2022a - 9.12.0.2327980) including SPM12. Additionally, R (4.3.1) was used for linear mixed-effects (LME) modeling and Python (3.10) for CLIP and DINO feature extraction.
 
 To reproduce the analyses:
 
-Download the required data (see links above) and place files in the indicated folders.
+Download the required data and material (see links above) and place files in the indicated folders.
 
 Run the MATLAB live scripts (.mlx), which include step-by-step explanations.
 
 If anything is unclear, feel free to contact me.
-
-
-
-All code was producted on Windows 11 operating system.
 
 
 
