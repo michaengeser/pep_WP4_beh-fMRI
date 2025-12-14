@@ -34,7 +34,7 @@ Functional and anatomical sourcedata files: https://zenodo.org/records/17653128
 Preprocessed task-run files: https://zenodo.org/records/17661600
 (Unzip and place in the fMRI/derivatives folder.)
 
-Preprocessed localizer-run files: https://zenodo.org/records/17701429
+Preprocessed localizer-run files: https://zenodo.org/records/17929617
 (Unzip and place in the fMRI/derivatives folder.)
 
 
