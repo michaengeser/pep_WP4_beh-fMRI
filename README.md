@@ -6,6 +6,7 @@ This repository contains the code and data of the paper:
 
 It includes experimental code, behavioral analysis scripts, and materials for investigating how individual differences in world models influence scene perception.
 
+
 ## Installation 
 Download or clone the repository (~7GB without fMRI data). Download VGG16 network files (https://osf.io/zjtwx/) and place in folders named accordingly. 
 
@@ -14,7 +15,9 @@ Download the fMRI data only if you wish to reproduce the full preprocessing or t
 
 Download and installation should take <30 min. on a "normal" computer.
 
-Additionally install the following software dependencies
+The code is mostly written in Matlab (R2022a) on Windows 11. Installation on other operating systems might need minor adjustments.
+
+Additionally install the following software dependencies:
 Psychtoolbox (3.0.19) for the experiment code
 SPM12 for fMRI analysis
 
@@ -127,7 +130,7 @@ pep_wp4_beh-fMRI/
 
 ## How to Use This Repository
 ### Experiments 
-The behavioral and fMRI experiments are implemented in MATLAB (R2022a) with Psychtoolbox (3.0.19).
+The behavioral and fMRI experiments are implemented in MATLAB (R2022a - 9.12.0.2327980) with Psychtoolbox (3.0.19).
 
 Run_wp4_beh.m for the behavioral experiment
 
@@ -137,7 +140,7 @@ run_experiment_fMRI.m for the fMRI experiment
 
 
 ### Analysis
-Most analyses are implemented in MATLAB (R2022a) including SPM12. Additionally, R (4.3.1) was used for linear mixed-effects (LME) modeling and Python (3.10) for CLIP and DINO feature extraction.
+Most analyses are implemented in MATLAB (R2022a - 9.12.0.2327980) including SPM12. Additionally, R (4.3.1) was used for linear mixed-effects (LME) modeling and Python (3.10) for CLIP and DINO feature extraction.
 
 To reproduce the analyses:
 
