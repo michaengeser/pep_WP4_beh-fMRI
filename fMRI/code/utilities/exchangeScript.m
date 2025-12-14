@@ -1,7 +1,7 @@
 % --- CONFIGURATION ---
-sourceRoot = 'D:\pep_wp4_fMRI';    % i.e., path to project backup on hard drive
-targetRoot = 'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\GitHub\pep_wp4_fMRI'; % i.e., path to project folder on laptop
-filePattern = 'wrsub-1*'; % files of interest
+sourceRoot = 'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\derivatives_task_runs';    % i.e., path to project backup on hard drive
+targetRoot = 'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\derivatives_localizer'; % i.e., path to project folder on laptop
+filePattern = '*localizer*'; % files of interest
 
 % --- FIND FILES ---
 % Get list of all files starting with swsub recursively

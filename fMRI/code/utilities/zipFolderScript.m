@@ -1,5 +1,5 @@
 % Define the parent folder
-parentFolder = 'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\derivatives';
+parentFolder = 'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\derivatives_localizer';
 
 % Get list of all items in the parent folder
 items = dir(parentFolder);
