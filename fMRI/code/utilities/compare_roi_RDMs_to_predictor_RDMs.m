@@ -31,13 +31,13 @@ if ~isfield(cfg, 'plotting_predictors'); cfg.plotting_predictors = 1:numel(cfg.p
 colors = zeros(numel(cfg.RDM_to_partial_out),3);
 short_names = cell(1, numel(cfg.RDM_to_partial_out));
 for var = 1:numel(cfg.RDM_to_partial_out)
-    if strcmp(cfg.RDM_to_partial_out{var}, 'typical_late')
+    if strcmp(cfg.RDM_to_partial_out{var}, 'typical_late') || strcmp(cfg.RDM_to_partial_out{var}, 'typical_early')
         short_names{var} = 'Typcial drawing';
         colors(var,:) = [1, 0, 1];
-    elseif strcmp(cfg.RDM_to_partial_out{var}, 'control_late')
+    elseif strcmp(cfg.RDM_to_partial_out{var}, 'control_late') || strcmp(cfg.RDM_to_partial_out{var}, 'control_early')
         short_names{var} = 'Control drawing';
         colors(var,:) = [.8, .8, .8];
-    elseif strcmp(cfg.RDM_to_partial_out{var}, 'photos_late')
+    elseif strcmp(cfg.RDM_to_partial_out{var}, 'photos_late') || strcmp(cfg.RDM_to_partial_out{var}, 'photos_early')
         short_names{var} = 'Photos';
         colors(var,:) = [.4, .9, 1];
     end

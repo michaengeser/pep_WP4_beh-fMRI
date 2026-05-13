@@ -1,11 +1,11 @@
 % --- CONFIGURATION ---
-sourceRoot = 'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\derivatives_task_runs';    % i.e., path to project backup on hard drive
-targetRoot = 'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\derivatives_localizer'; % i.e., path to project folder on laptop
-filePattern = '*localizer*'; % files of interest
+sourceRoot = 'D:\pep_wp4_fMRI\derivatives';    % i.e., path to project backup on hard drive
+targetRoot = 'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität Gießen\Dokumente\GitHub\pep_WP4_beh-fMRI\fMRI\derivatives'; % i.e., path to project folder on laptop
+filePattern = 'GLMsingle_betas.nii'; % files of interest
 
 % --- FIND FILES ---
 % Get list of all files starting with swsub recursively
-files = dir(fullfile(sourceRoot, '**', filePattern));
+files = dir(fullfile(sourceRoot, '**', 'GLMsingleEstimates', filePattern));
 
 fprintf('Found %d files to copy.\n', numel(files));
 

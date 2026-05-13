@@ -70,8 +70,8 @@ for category = cfg.categories
                         mask_label_short, '_run_', num2str(currentRun), '.mat'];
                 end
 
-                load(fullfile(timecourseDir, fileName))
-                currentTimecourse = saveData;
+                newData = load(fullfile(timecourseDir, fileName));
+                currentTimecourse = newData.(char(fieldnames(newData)));
 
                 if cfg.detrend
                     currentTimecourse = detrend(currentTimecourse);
