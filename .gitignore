@@ -15,3 +15,6 @@ behavior/image_similarities/pictures
 behavior/analysis/vgg16_imagenet
 behavior/analysis/vgg16_places365
 behavior/analysis/figures/
+/fMRI/derivatives
+/fMRI/localizer/onsets
+/fMRI/sourcedata
