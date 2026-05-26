@@ -18,3 +18,9 @@ behavior/analysis/figures/
 /fMRI/derivatives
 /fMRI/localizer/onsets
 /fMRI/sourcedata
+fMRI/dnn_features/vgg16_imagenet/exp_1/control_bathroom_conv1_2.mat
+fMRI/dnn_features/vgg16_imagenet/exp_1/control_kitchen_conv1_2.mat
+fMRI/dnn_features/vgg16_imagenet/exp_1/photos_bathroom_conv1_2.mat
+fMRI/dnn_features/vgg16_imagenet/exp_1/photos_kitchen_conv1_2.mat
+fMRI/dnn_features/vgg16_imagenet/exp_1/typical_bathroom_conv1_2.mat
+fMRI/dnn_features/vgg16_imagenet/exp_1/typical_kitchen_conv1_2.mat
