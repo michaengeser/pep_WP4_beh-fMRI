@@ -1,5 +1,8 @@
 function d = calculate_jaccard(d, cfg)
 
+if ~isfield(cfg, 'analysis_names'); cfg.analysis_names = {'typical'  'control'  'photos'};end
+if ~isfield(cfg, 'force_recompute'); cfg.force_recompute = true;end
+if ~isfield(cfg, 'dissimilarity'); cfg.dissimilarity = true;end
 
 % calculate_jaccard_from_csv.m
 % Computes pairwise Jaccard similarity across all rows in the object CSV.
@@ -13,7 +16,7 @@ function d = calculate_jaccard(d, cfg)
 
 outputFilename = fullfile(pwd, '..', 'derivatives', 'group_level', 'jaccard_similarity.mat');
 
-if exist(outputFilename, 'file')
+if exist(outputFilename, 'file') && cfg.force_recompute == false
     load(outputFilename)
 else
 
@@ -29,7 +32,7 @@ else
             elseif strcmp(analysis_name, 'control')
                 filename = fullfile(pwd, '..', 'drawings', [category, '_control_objects.csv']);
             elseif strcmp(analysis_name, 'photos')
-                error('No object lists on photos')
+                filename = fullfile(pwd, '..', 'photos', [category, '_objects.csv']);
             end
 
             %% Read CSV
