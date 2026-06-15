@@ -24,3 +24,5 @@ fMRI/dnn_features/vgg16_imagenet/exp_1/photos_bathroom_conv1_2.mat
 fMRI/dnn_features/vgg16_imagenet/exp_1/photos_kitchen_conv1_2.mat
 fMRI/dnn_features/vgg16_imagenet/exp_1/typical_bathroom_conv1_2.mat
 fMRI/dnn_features/vgg16_imagenet/exp_1/typical_kitchen_conv1_2.mat
+fMRI/code/utilities/gemini_extract_objects_from_photo.ipynb
+fMRI/code/utilities/gemini_verbal_descriptions.ipynb
