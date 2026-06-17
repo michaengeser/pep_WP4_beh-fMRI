@@ -1,4 +1,4 @@
-function d = compare_roi_RDMs_to_predictor_RDMs(d, cfg)
+function d = compare_roi_RDMs_to_multiple_predictor_RDMs(d, cfg)
 %  COMPARE_ROI_RDMS_TO_PREDICTOR_RDMS Brief summary of this function.
 %
 % Detailed explanation of this function.
@@ -25,23 +25,10 @@ elseif cfg.scatter_in_violin == 1
     violin_type = 'half';
 end
 if ~isfield(cfg, 'ylim'); cfg.ylim = [-0.4, 0.4];end
-if ~isfield(cfg, 'task_plotting'); cfg.plott_gap = 0;end
-if ~isfield(cfg, 'plotting_predictors'); cfg.plotting_predictors = 1:(numel(cfg.predictor_RDMs)*length(cfg.dnns));end
+if ~isfield(cfg, 'task_plotting'); cfg.plott_gap = 1;end
+if ~isfield(cfg, 'filter_predictors'); cfg.filter_predictors = {'_'};end % {'_'} will plot all predictors
 % get variable attributes
-colors = zeros(numel(cfg.RDM_to_partial_out),3);
-short_names = cell(1, numel(cfg.RDM_to_partial_out));
-for var = 1:numel(cfg.RDM_to_partial_out)
-    if strcmp(cfg.RDM_to_partial_out{var}, 'typical_late') || strcmp(cfg.RDM_to_partial_out{var}, 'typical_early')
-        short_names{var} = 'Typcial drawing';
-        colors(var,:) = [1, 0, 1];
-    elseif strcmp(cfg.RDM_to_partial_out{var}, 'control_late') || strcmp(cfg.RDM_to_partial_out{var}, 'control_early')
-        short_names{var} = 'Control drawing';
-        colors(var,:) = [.8, .8, .8];
-    elseif strcmp(cfg.RDM_to_partial_out{var}, 'photos_late') || strcmp(cfg.RDM_to_partial_out{var}, 'photos_early')
-        short_names{var} = 'Photos';
-        colors(var,:) = [.4, .9, 1];
-    end
-end
+short_names = cfg.plot_names;
 
 if isempty(gcp('nocreate'))
     parpool(10);
@@ -126,7 +113,7 @@ for roi_i = 1:numel(cfg.rois_of_interest)
         d.compare_roi_to_predictor.(roi).(category) = res_table;
         % make random permutations
         if cfg.permutation_test
-            nPred = numel(cfg.RDM_to_partial_out);
+            nPred = numel(cfg.RDM_to_partial_out)*numel(cfg.dnns);
 
             % reference RDM
             ref_RDM = RDMs(1).RDM;
@@ -199,63 +186,48 @@ for roi_i = 1:numel(cfg.rois_of_interest)
     if cfg.plotting
 
         % filter predictors to plot
-        if numel(cfg.plotting_predictors) ~= (numel(cfg.predictor_RDMs)*length(cfg.dnns))
-            res_table = res_table(cfg.plotting_predictors, :);
+        plot_filter = contains(res_table.name, cfg.filter_predictors);
+        res_table = res_table(plot_filter, :);
+
+        if ~isempty(short_names) && height(res_table) < numel(short_names)
+            short_names = short_names(1:height(res_table));
+            colors = colors(1:height(res_table), :);
         end
 
-        if ~isempty(short_names) && numel(cfg.plotting_predictors) < numel(short_names)
-            short_names = short_names(cfg.plotting_predictors);
-            colors = colors(cfg.plotting_predictors, :);
+        if numel(1:height(res_table)) ~= height(perm_r_mat)
+            perm_r_mat = perm_r_mat(plot_filter, :);
         end
 
-        if numel(cfg.plotting_predictors) ~= height(perm_r_mat)
-            perm_r_mat = perm_r_mat(cfg.plotting_predictors, :);
-        end
-
-        % loop through res_table and add according variables
-        if cfg.plotting_predictors == 1
-            if strcmp(roi, 'V1')
-                res_table.color_R = .97;
-                res_table.color_G = .41;
-                res_table.color_B = .92;
-            elseif strcmp(roi, 'LOC')
-                res_table.color_R = 1;
-                res_table.color_G = 0;
-                res_table.color_B = 1;
-            elseif strcmp(roi, 'PPA')
-                res_table.color_R = .73;
-                res_table.color_G = .02;
-                res_table.color_B = .73;
-            elseif strcmp(roi, 'TOS')
-                res_table.color_R = .47;
-                res_table.color_G = .03;
-                res_table.color_B = .45;
-            elseif strcmp(roi, 'LPFC')
-                res_table.color_R = .24;
-                res_table.color_G = .04;
-                res_table.color_B = .3;
-            else
-                res_table.color_R = 1;
-                res_table.color_G = 0;
-                res_table.color_B = 1;
-            end
-
-        else
-            clr = cool(numel(RDMs));
-            for row = 1:height(res_table)
-                % colors
-                if ~isempty(colors)
-                    res_table.color_R(row) = colors(row,1);
-                    res_table.color_G(row) = colors(row,2);
-                    res_table.color_B(row) = colors(row,3);
-                else % if no colors specified make the bars grey
-                    res_table.color_R(row) = clr(row,1);
-                    res_table.color_G(row) = clr(row,2);
-                    res_table.color_B(row) = clr(row,3);
-                end
-            end
-        end
+        % loop through result table rows and enter attributes
         for row = 1:height(res_table)
+
+            % loop through res_table and add according variables
+            if strcmp(roi, 'V1')
+                res_table.color_R(row) = .97;
+                res_table.color_G(row) = .41;
+                res_table.color_B(row) = .92;
+            elseif strcmp(roi, 'LOC')
+                res_table.color_R(row) = 1;
+                res_table.color_G(row) = 0;
+                res_table.color_B(row) = 1;
+            elseif strcmp(roi, 'PPA')
+                res_table.color_R(row) = .73;
+                res_table.color_G(row) = .02;
+                res_table.color_B(row) = .73;
+            elseif strcmp(roi, 'TOS')
+                res_table.color_R(row) = .47;
+                res_table.color_G(row) = .03;
+                res_table.color_B(row) = .45;
+            elseif strcmp(roi, 'LPFC')
+                res_table.color_R(row) = .24;
+                res_table.color_G(row) = .04;
+                res_table.color_B(row) = .3;
+            else
+                res_table.color_R(row) = 1;
+                res_table.color_G(row) = 0;
+                res_table.color_B(row) = 1;
+            end
+
             % short names
             if ~isempty(short_names)
                 res_table.short_names{row} = short_names{row};
@@ -417,8 +389,8 @@ if cfg.plotting
             % get y position based on error bars
             y_pos(i_bar) = errorHandles(i_bar).YPositiveDelta + errorHandles(i_bar).YData + 0.08;
 
-        elseif strcmp(cfg.plot_type, 'violin')
-            if ~isgraphics(mainHandles(i_bar).ds)
+        elseif strcmp(cfg.plot_type, 'violin') 
+            if all(~isgraphics(mainHandles(i_bar).ds)) || isempty(mainHandles(i_bar).ds)
                 continue
             end
             y_pos(i_bar) = max(mainHandles(i_bar).ds.Vertices(:, 2)) + 0.08;
@@ -450,12 +422,26 @@ if cfg.plotting
     ax = gca;
     ax.Box = 'off';
     yline(0, 'LineWidth', 2, 'Color', 'k');
-    % get labels
+
     if cfg.xaxis_labels
-        xticks(ceil(length(cfg.plotting_predictors)/2):...
-            length(cfg.plotting_predictors)+cfg.plott_gap:...
-            (length(cfg.plotting_predictors)+2)*length(cfg.rois_of_interest));
-        xticklabels(cfg.rois_of_interest);
+        % get labels
+        x_ticks = [];
+        x_labels = {};
+        count = 0;
+        for roi_i = 1:numel(cfg.rois_of_interest)
+            for row = 1:height(res_table)
+
+                count = count + 1;
+                x_ticks = [x_ticks, count];
+
+
+            end
+            count = count + cfg.plott_gap;
+            x_labels = [x_labels, short_names];
+        end
+
+        xticks(x_ticks);
+        xticklabels(x_labels);
         xtickangle(45);
     else
         xticklabels([]);
@@ -465,8 +451,5 @@ if cfg.plotting
     if cfg.add_legend
         legend(res_table.short_names, 'Location','northeastoutside');
     end
-    % saving
-    fig_path = fullfile(pwd, 'figures', ['exp_', num2str(cfg.exp_num)], 'compare_roi_RDMs_to_predictor_RDMs');
-    save_plot(cfg.save_name, fig_path)
 end
 end

@@ -1,20 +1,19 @@
-function d = calculate_jaccard(d, cfg)
+function d = get_object_sim(d, cfg)
 
 if ~isfield(cfg, 'analysis_names'); cfg.analysis_names = {'typical'  'control'  'photos'};end
-if ~isfield(cfg, 'force_recompute'); cfg.force_recompute = true;end
+if ~isfield(cfg, 'force_recompute'); cfg.force_recompute = false;end
 if ~isfield(cfg, 'dissimilarity'); cfg.dissimilarity = true;end
 
-% calculate_jaccard_from_csv.m
-% Computes pairwise Jaccard similarity across all rows in the object CSV.
+% Computes pairwise object overlap and object sparsity comparison across all rows in the object CSV.
 %
 % Expected CSV format:
 % id, object_1, object_2, object_3, ...
 %
 % Each row is treated as a SET of objects.
-% Repeated objects within the same row are counted only once for Jaccard.
+% Repeated objects within the same row are counted only once for object overlap.
 % loop through categories
 
-outputFilename = fullfile(pwd, '..', 'derivatives', 'group_level', 'jaccard_similarity.mat');
+outputFilename = fullfile(pwd, '..', 'derivatives', 'group_level', 'object_overlap.mat');
 
 if exist(outputFilename, 'file') && cfg.force_recompute == false
     load(outputFilename)
@@ -63,6 +62,7 @@ else
             % rows = scenes/items
             % columns = unique objects
             presence = false(nRows, nObjects);
+            subObjectCount = nan(1, cfg.n);
 
             for i = 1:nRows
                 rowObjects = objectData(i, :);
@@ -71,13 +71,17 @@ else
 
                 % Treat as a set: remove duplicates within row
                 rowObjects = unique(rowObjects);
+                subObjectCount(i) = numel(rowObjects);
 
                 [tf, loc] = ismember(rowObjects, uniqueObjects);
                 presence(i, loc(tf)) = true;
             end
 
-            %% Compute pairwise Jaccard similarity
-            jaccardSim_mat = zeros(nRows, nRows);
+            % get inter-subject RDM for object count
+            objectCount_mat = abs(subObjectCount - subObjectCount');
+
+            %% Compute pairwise object overlap and object sparsity
+            objectSim_mat = zeros(nRows, nRows);
 
             for i = 1:nRows
                 for j = 1:nRows
@@ -85,34 +89,40 @@ else
                     unionCount = sum(presence(i, :) | presence(j, :));
 
                     if unionCount == 0
-                        jaccardSim_mat(i, j) = NaN;
+                        objectSim_mat(i, j) = NaN;
                     else
-                        jaccardSim_mat(i, j) = intersectionCount / unionCount;
+                        objectSim_mat(i, j) = intersectionCount / unionCount;
                     end
                 end
             end
             
             if cfg.dissimilarity
-                jaccardSim_mat = 1 - jaccardSim_mat;
+                objectSim_mat = 1 - objectSim_mat;
             end 
 
-            jaccardSim.(analysis_name).(category).subject_mean.name = 'jaccardSim';
-            jaccardSim.(analysis_name).(category).subject_mean.color = [0,0,0];
-            jaccardSim.(analysis_name).(category).subject_mean.RDM = jaccardSim_mat;
-            jaccardSim.(analysis_name).(category).subjects = rowIDs;
+            objectSim.(analysis_name).(category).subject_mean.name = 'objectSim';
+            objectSim.(analysis_name).(category).subject_mean.color = [0,0,0];
+            objectSim.(analysis_name).(category).subject_mean.RDM = objectSim_mat;
+            objectSim.(analysis_name).(category).subjects = rowIDs;
 
-            disp("Computed pairwise Jaccard similarity matrix for:");
+            objectCount.(analysis_name).(category).subject_mean.name = 'objectCount';
+            objectCount.(analysis_name).(category).subject_mean.color = [0,0,0];
+            objectCount.(analysis_name).(category).subject_mean.RDM = objectCount_mat;
+            objectCount.(analysis_name).(category).subjects = rowIDs;
+
+            disp("Computed pairwise object overlap similarity matrix for:");
             disp([category, ' - ', analysis_name]);
 
         end
     end
 
     % Save results
-    save(outputFilename, "jaccardSim")
+    save(outputFilename, "objectSim", "objectCount")
 end
 
 % Write to results struct
-d.DNN.jaccardSim = jaccardSim; % pretend this is a DNN approach
+d.DNN.objectSim = objectSim; % pretend this is a DNN approach
+d.DNN.objectCount = objectCount; % pretend this is a DNN approach
 
 disp("Done.");
 
