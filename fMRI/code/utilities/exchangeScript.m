@@ -1,7 +1,7 @@
 % --- CONFIGURATION ---
 sourceRoot = 'D:\pep_wp4_fMRI\derivatives';    % i.e., path to project backup on hard drive
 targetRoot = 'C:\Users\JLU-SU\GitHub\pep_WP4_beh-fMRI\fMRI\derivatives'; % i.e., path to project folder on laptop
-filePattern = 'GLMsingle_betas.nii'; % files of interest
+filePattern = 'trialIDs.mat'; % files of interest
 
 % --- FIND FILES ---
 % Get list of all files starting with swsub recursively
