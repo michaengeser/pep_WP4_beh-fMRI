@@ -10,11 +10,11 @@ nPred = length(cfg.analysis_names);
 own_vs_other_mat = zeros(nPred, cfg.n, nmasks, length(cfg.categories));
 own_cor = zeros(nPred, cfg.n, nmasks, length(cfg.categories), 1);
 other_cor = zeros(nPred, cfg.n, nmasks, length(cfg.categories), cfg.n - 1);
-var_names = {'brain_resp', 'stimulus', cfg.analysis_names{:}, 'own', 'subject', 'category','roi'};
+var_names = {'brain_resp', 'stimulus', cfg.analysis_names{:}, 'own', 'ref_subject', 'pred_subject', 'category','roi'};
 pred_formats = repmat({'double'}, 1, nPred);
 big_fucking_table = table( ...
     'Size',[1, length(var_names)], ...
-    'VariableTypes',{'double', 'string', pred_formats{:}, 'logical','string','string','string'}, ...
+    'VariableTypes',{'double', 'string', pred_formats{:}, 'logical','string','string','string','string'}, ...
     'VariableNames',var_names);
 
 
@@ -96,7 +96,8 @@ for iCate = 1:length(cfg.categories)
             big_fucking_table.brain_resp(rows) = ownData;
             big_fucking_table.stimulus(rows) = stimNames;
             big_fucking_table.own(rows) = true;
-            big_fucking_table.subject(rows) = subID;
+            big_fucking_table.ref_subject(rows) = subID;
+            big_fucking_table.pred_subject(rows) = subID;
             big_fucking_table.category(rows) = category;
             big_fucking_table.roi(rows) = mask_label_short;
 
@@ -127,7 +128,8 @@ for iCate = 1:length(cfg.categories)
                 big_fucking_table.brain_resp(rows) = ownData;
                 big_fucking_table.stimulus(rows) = stimNames;
                 big_fucking_table.own(rows) = false;
-                big_fucking_table.subject(rows) = subID;
+                big_fucking_table.ref_subject(rows) = subID;
+                big_fucking_table.pred_subject(rows) = sprintf('sub-%0.3d', cfg.subNums(iSub_other));
                 big_fucking_table.category(rows) = category;
                 big_fucking_table.roi(rows) = mask_label_short;
 
@@ -137,9 +139,6 @@ for iCate = 1:length(cfg.categories)
             end
         end
     end
-
-    % clean table
-    big_fucking_table = big_fucking_table(+any(ismissing(big_fucking_table), 2), :); 
 
     % Mean and SEM
     X = squeeze(own_vs_other_mat(1, :, :, iCate));
@@ -180,6 +179,19 @@ for iCate = 1:length(cfg.categories)
     hold off
 
 end
+
+% clean table
+big_fucking_table = big_fucking_table(~any(ismissing(big_fucking_table), 2), :);
+
+% LPFC_table = big_fucking_table(strcmp(big_fucking_table.roi, 'LPFC'), :);
+% lme = fitlme(LPFC_table,...
+%     ['brain_resp ~ typical + control + photos + own + typical:own + control:own + photos:own +' ...
+%     '(typical + control + photos + own + typical:own + control:own + photos:own | ref_subject) + ' ...
+%     '(typical + control + photos + own + typical:own + control:own + photos:own | pred_subject) + ' ...
+%     '(typical + control + photos + own + typical:own + control:own + photos:own | category) + ' ...
+%     '(typical + control + photos + own + typical:own + control:own + photos:own | stimulus)']);
+% disp(lme)
+
 
 % Mean and SEM
 X = squeeze(mean(own_vs_other_mat(1, :, :, :), 4));
