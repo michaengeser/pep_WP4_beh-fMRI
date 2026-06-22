@@ -1,6 +1,14 @@
 function d = own_vs_other(d, cfg)
 
 if ~isfield(cfg, 'fMRI_data_type');  cfg.fMRI_data_type = 'betas';end
+if ~isfield(cfg, 'canonical_stim'); cfg.canonical_stim = false;end
+if ~isfield(cfg, 'partial_cor'); cfg.partial_cor = true;end
+if ~isfield(cfg, 'do_LME'); cfg.do_LME = false;end
+% get stimuli DNN features
+can_tag = "";
+if cfg.canonical_stim
+    can_tag = 'canonical_';
+end
 cfg.correlation_type = 'Spearman';
 
 % prepare
@@ -32,7 +40,7 @@ for iCate = 1:length(cfg.categories)
     for iPred = 1:nPred
         for iSub = 1:cfg.n
             allPredictors(iPred, :, iSub) = ...
-                cell2mat({d.DNN.(cfg.dnn).stimuli.(category).(char(cfg.analysis_names{iPred}))(iSub).mean_sim});
+                cell2mat({d.DNN.(cfg.dnn).([can_tag, 'stimuli']).(category).(char(cfg.analysis_names{iPred}))(iSub).mean_sim});
         end
     end
 
@@ -57,6 +65,7 @@ for iCate = 1:length(cfg.categories)
             end
             allPredictors_unique(:, :, iSub) = uniquePred';
         end
+        allPredictors_unique = allPredictors;
     end
 
     all_mask_lables = cell(nmasks, 1);
@@ -91,21 +100,25 @@ for iCate = 1:length(cfg.categories)
             end
 
             % add values to big tables
-            current_row = height(big_fucking_table);
-            rows = current_row+1:current_row+length(ownData);
-            big_fucking_table.brain_resp(rows) = ownData;
-            big_fucking_table.stimulus(rows) = stimNames;
-            big_fucking_table.own(rows) = true;
-            big_fucking_table.ref_subject(rows) = subID;
-            big_fucking_table.pred_subject(rows) = subID;
-            big_fucking_table.category(rows) = category;
-            big_fucking_table.roi(rows) = mask_label_short;
+            if cfg.do_LME
+                current_row = height(big_fucking_table);
+                rows = current_row+1:current_row+length(ownData);
+                big_fucking_table.brain_resp(rows) = ownData;
+                big_fucking_table.stimulus(rows) = stimNames;
+                big_fucking_table.own(rows) = true;
+                big_fucking_table.ref_subject(rows) = subID;
+                big_fucking_table.pred_subject(rows) = subID;
+                big_fucking_table.category(rows) = category;
+                big_fucking_table.roi(rows) = mask_label_short;
+            end
 
             % correlate with stimuli features for unique predictor
             for iPred = 1:nPred
 
                 % add to table
-                big_fucking_table.(cfg.analysis_names{iPred})(rows) = squeeze(allPredictors(iPred, :, iSub))';
+                if cfg.do_LME
+                    big_fucking_table.(cfg.analysis_names{iPred})(rows) = squeeze(allPredictors(iPred, :, iSub))';
+                end
 
                 % run correlation
                 cor_vals = corr(ownData, squeeze(allPredictors_unique(iPred, :, :)), 'row', 'pairwise', 'type', cfg.correlation_type)';
@@ -118,23 +131,25 @@ for iCate = 1:length(cfg.categories)
                 mean(squeeze(other_cor(:, iSub, j, iCate, :)), 2, 'omitnan');
 
             % write other subjects data to table
-            for iSub_other = 1:length(cfg.subNums)
-                if iSub == iSub_other
-                    continue
-                end
+            if cfg.do_LME
+                for iSub_other = 1:length(cfg.subNums)
+                    if iSub == iSub_other
+                        continue
+                    end
 
-                current_row = height(big_fucking_table);
-                rows = current_row+1:current_row+length(ownData);
-                big_fucking_table.brain_resp(rows) = ownData;
-                big_fucking_table.stimulus(rows) = stimNames;
-                big_fucking_table.own(rows) = false;
-                big_fucking_table.ref_subject(rows) = subID;
-                big_fucking_table.pred_subject(rows) = sprintf('sub-%0.3d', cfg.subNums(iSub_other));
-                big_fucking_table.category(rows) = category;
-                big_fucking_table.roi(rows) = mask_label_short;
+                    current_row = height(big_fucking_table);
+                    rows = current_row+1:current_row+length(ownData);
+                    big_fucking_table.brain_resp(rows) = ownData;
+                    big_fucking_table.stimulus(rows) = stimNames;
+                    big_fucking_table.own(rows) = false;
+                    big_fucking_table.ref_subject(rows) = subID;
+                    big_fucking_table.pred_subject(rows) = sprintf('sub-%0.3d', cfg.subNums(iSub_other));
+                    big_fucking_table.category(rows) = category;
+                    big_fucking_table.roi(rows) = mask_label_short;
 
-                for iPred = 1:nPred
-                    big_fucking_table.(cfg.analysis_names{iPred})(rows) = squeeze(allPredictors(iPred, :, iSub_other))';
+                    for iPred = 1:nPred
+                        big_fucking_table.(cfg.analysis_names{iPred})(rows) = squeeze(allPredictors(iPred, :, iSub_other))';
+                    end
                 end
             end
         end
@@ -181,17 +196,18 @@ for iCate = 1:length(cfg.categories)
 end
 
 % clean table
-big_fucking_table = big_fucking_table(~any(ismissing(big_fucking_table), 2), :);
+if cfg.do_LME
+    big_fucking_table = big_fucking_table(~any(ismissing(big_fucking_table), 2), :);
 
-% LPFC_table = big_fucking_table(strcmp(big_fucking_table.roi, 'LPFC'), :);
-% lme = fitlme(LPFC_table,...
-%     ['brain_resp ~ typical + control + photos + own + typical:own + control:own + photos:own +' ...
-%     '(typical + control + photos + own + typical:own + control:own + photos:own | ref_subject) + ' ...
-%     '(typical + control + photos + own + typical:own + control:own + photos:own | pred_subject) + ' ...
-%     '(typical + control + photos + own + typical:own + control:own + photos:own | category) + ' ...
-%     '(typical + control + photos + own + typical:own + control:own + photos:own | stimulus)']);
-% disp(lme)
-
+    % LPFC_table = big_fucking_table(strcmp(big_fucking_table.roi, 'LPFC'), :);
+    % lme = fitlme(LPFC_table,...
+    %     ['brain_resp ~ typical + control + photos + own + typical:own + control:own + photos:own +' ...
+    %     '(typical + control + photos + own + typical:own + control:own + photos:own | ref_subject) + ' ...
+    %     '(typical + control + photos + own + typical:own + control:own + photos:own | pred_subject) + ' ...
+    %     '(typical + control + photos + own + typical:own + control:own + photos:own | category) + ' ...
+    %     '(typical + control + photos + own + typical:own + control:own + photos:own | stimulus)']);
+    % disp(lme)
+end
 
 % Mean and SEM
 X = squeeze(mean(own_vs_other_mat(1, :, :, :), 4));
