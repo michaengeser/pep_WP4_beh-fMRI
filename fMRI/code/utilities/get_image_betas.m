@@ -106,7 +106,7 @@ else
 
                 betas.(category).(subID2).(mask_label_short)(idx).image_name = template_names{template_trialIDs == trID};
                 betas.(category).(subID2).(mask_label_short)(idx).all_betas = meanData(trID == trialIDs(:, 1));
-                betas.(category).(subID2).(mask_label_short) (idx).mean_betas = mean(meanData(trID == trialIDs(:, 1)));
+                betas.(category).(subID2).(mask_label_short)(idx).mean_betas = mean(meanData(trID == trialIDs(:, 1)), 'omitnan');
             end
         end % rois
     end

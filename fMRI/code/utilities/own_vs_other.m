@@ -5,7 +5,7 @@ if ~isfield(cfg, 'canonical_stim'); cfg.canonical_stim = false;end
 if ~isfield(cfg, 'partial_cor'); cfg.partial_cor = true;end
 if ~isfield(cfg, 'do_LME'); cfg.do_LME = false;end
 % get stimuli DNN features
-can_tag = "";
+can_tag = char("");
 if cfg.canonical_stim
     can_tag = 'canonical_';
 end
@@ -243,9 +243,9 @@ for m = 1:nmasks
     pvals(m) = p;
     tvals(m) = stats.tstat;
 end
-[~,~,~,pvals_fdr] = fdr_bh(pvals);
+%[~,~,~,pvals] = fdr_bh(pvals);
 for m = 1:nmasks
-    if pvals_fdr(m) < 0.05
+    if pvals(m) < 0.05
         % asterisk position
         yPos = colMean(m) + rowsEM(m) + 0.05*yRange;
         text(m, yPos, '*', ...
