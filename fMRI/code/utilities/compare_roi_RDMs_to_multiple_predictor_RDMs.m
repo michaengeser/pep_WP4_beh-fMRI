@@ -25,7 +25,7 @@ elseif cfg.scatter_in_violin == 1
     violin_type = 'half';
 end
 if ~isfield(cfg, 'ylim'); cfg.ylim = [-0.4, 0.4];end
-if ~isfield(cfg, 'task_plotting'); cfg.plott_gap = 1;end
+if ~isfield(cfg, 'task_plotting'); cfg.plott_gap = 0;end
 if ~isfield(cfg, 'filter_predictors'); cfg.filter_predictors = {'_'};end % {'_'} will plot all predictors
 % get variable attributes
 short_names = cfg.plot_names;
@@ -189,7 +189,7 @@ for roi_i = 1:numel(cfg.rois_of_interest)
         plot_filter = contains(res_table.name, cfg.filter_predictors);
         res_table = res_table(plot_filter, :);
 
-        if ~isempty(short_names) && height(res_table) < numel(short_names)
+        if ~isempty(short_names) && height(res_table) > numel(short_names)
             short_names = short_names(1:height(res_table));
             colors = colors(1:height(res_table), :);
         end
@@ -203,29 +203,33 @@ for roi_i = 1:numel(cfg.rois_of_interest)
 
             % loop through res_table and add according variables
             if strcmp(roi, 'V1')
-                res_table.color_R(row) = .97;
-                res_table.color_G(row) = .41;
-                res_table.color_B(row) = .92;
+                res_table.color_R = .97;
+                res_table.color_G = .41;
+                res_table.color_B = .92;
             elseif strcmp(roi, 'LOC')
-                res_table.color_R(row) = 1;
-                res_table.color_G(row) = 0;
-                res_table.color_B(row) = 1;
+                res_table.color_R = 1;
+                res_table.color_G = 0;
+                res_table.color_B = 1;
             elseif strcmp(roi, 'PPA')
-                res_table.color_R(row) = .73;
-                res_table.color_G(row) = .02;
-                res_table.color_B(row) = .73;
+                res_table.color_R = .8;
+                res_table.color_G = 0;
+                res_table.color_B = .8;
             elseif strcmp(roi, 'TOS')
-                res_table.color_R(row) = .47;
-                res_table.color_G(row) = .03;
-                res_table.color_B(row) = .45;
+                res_table.color_R = .65;
+                res_table.color_G = 0;
+                res_table.color_B = .65;
+            elseif strcmp(roi, 'RSC')
+                res_table.color_R = .4;
+                res_table.color_G = 0;
+                res_table.color_B = .4;
             elseif strcmp(roi, 'LPFC')
-                res_table.color_R(row) = .24;
-                res_table.color_G(row) = .04;
-                res_table.color_B(row) = .3;
+                res_table.color_R = .15;
+                res_table.color_G = .0;
+                res_table.color_B = .15;
             else
-                res_table.color_R(row) = 1;
-                res_table.color_G(row) = 0;
-                res_table.color_B(row) = 1;
+                res_table.color_R = 1;
+                res_table.color_G = 0;
+                res_table.color_B = 1;
             end
 
             % short names

@@ -223,17 +223,21 @@ for roi_i = 1:numel(cfg.rois_of_interest)
                 res_table.color_G = 0;
                 res_table.color_B = 1;
             elseif strcmp(roi, 'PPA')
-                res_table.color_R = .73;
-                res_table.color_G = .02;
-                res_table.color_B = .73;
+                res_table.color_R = .8;
+                res_table.color_G = 0;
+                res_table.color_B = .8;
             elseif strcmp(roi, 'TOS')
-                res_table.color_R = .47;
-                res_table.color_G = .03;
-                res_table.color_B = .45;
+                res_table.color_R = .65;
+                res_table.color_G = 0;
+                res_table.color_B = .65;
+            elseif strcmp(roi, 'RSC')
+                res_table.color_R = .4;
+                res_table.color_G = 0;
+                res_table.color_B = .4;
             elseif strcmp(roi, 'LPFC')
-                res_table.color_R = .24;
-                res_table.color_G = .04;
-                res_table.color_B = .3;
+                res_table.color_R = .15;
+                res_table.color_G = .0;
+                res_table.color_B = .15;
             else
                 res_table.color_R = 1;
                 res_table.color_G = 0;
