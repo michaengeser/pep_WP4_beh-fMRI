@@ -72,15 +72,15 @@ for task_i = 1:numel(cfg.tasks_of_interest)
         all_preds = nan(nchoosek(cfg.n,2), length(cfg.RDM_to_partial_out));
 
         % get task RDM names
-        all_ref_names = {d.([category,'_RDM']).(cfg.ISC_type).name};
+        all_ref_names = {d.([category,'_RDM']).ratingRDM.name};
         % get task RDM
         ref_idx = find(strcmp(all_ref_names, voi));
         if ~isempty(ref_idx)
-            ref_RDM = d.([category,'_RDM']).(cfg.ISC_type)(ref_idx);
+            ref_RDM = d.([category,'_RDM']).ratingRDM(ref_idx);
         else
             tem_preditor_RDMs = cfg.predictor_RDMs; % store predictors temporally
             cfg.predictor_RDMs = {voi};
-            RDMs = d.([category,'_RDM']).(cfg.ISC_type)(1); % fill with some RDM as placeholder
+            RDMs = d.([category,'_RDM']).ratingRDM(1); % fill with some RDM as placeholder
             labels = {RDMs.name};
             [ref_RDM, cfg.labels] = evaluate_predictor_RDMs(d, RDMs, labels, cfg, category);
             cfg.predictor_RDMs = tem_preditor_RDMs; % write back predictors
@@ -185,7 +185,7 @@ for task_i = 1:numel(cfg.tasks_of_interest)
     if cfg.plotting
 
         % filter predictors to plot
-        plot_filter = contains(res_table.name, cfg.filter_predictors);
+        plot_filter = contains(lower(res_table.name), cfg.filter_predictors);
         res_table = res_table(plot_filter, :);
 
         if ~isempty(short_names) && height(res_table) > numel(short_names)
@@ -411,7 +411,7 @@ if cfg.plotting
     else
         ylabel([cfg.correlation_type, ' correlation [r]', newline]);
     end
-    %title('Compare reference RDM with predictors')
+    title(['Compare reference RDM with predictors - ', cfg.dnns])
     if isfield(cfg, 'plot_type')
         ylim(cfg.ylim)
     else

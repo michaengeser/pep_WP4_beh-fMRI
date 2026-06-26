@@ -19,17 +19,17 @@ else
             analysis_name = char(analysis_name);
 
             %% Choose input file
-            if strcmp(analysis_name, 'typical')
+            if strcmp(analysis_name, 'Own_drawing_DNN_RDM')
                 filename = fullfile(pwd, '..', 'image_similarities', 'drawings_draw3D', ...
                     'draw3D_images_exp1', 'own', category, 'LGNstatistics.mat');
                 gen_tag = 'gen';
                 copy_tag = 't_g'; % copy files do not have this (i.e. 102_bat_copy_gen3.png)
-            elseif strcmp(analysis_name, 'control')
+            elseif strcmp(analysis_name, 'Control_drawing_DNN_RDM')
                 filename = fullfile(pwd, '..', 'image_similarities', 'drawings_draw3D', ...
                     'draw3D_images_exp1', 'control', category, 'LGNstatistics.mat');
                 gen_tag = 'gen';
                 copy_tag = 'copy';
-            elseif strcmp(analysis_name, 'photos')
+            elseif strcmp(analysis_name, 'Photo_DNN_RDM')
                 filename = fullfile(pwd, '..', 'image_similarities', 'pictures', category, 'LGNstatistics.mat');
                 gen_tag = '';
                 copy_tag = '';
@@ -73,7 +73,7 @@ else
     end
 
     % Save results
-    save(outputFilename, "sc", "ce")
+    %save(outputFilename, "sc", "ce")
 end
 
 % Write to results struct

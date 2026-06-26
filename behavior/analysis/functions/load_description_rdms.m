@@ -19,11 +19,11 @@ else
             analysis_name = char(analysis_name);
 
             %% Choose input file
-            if strcmp(analysis_name, 'typical')
+            if strcmp(analysis_name, 'Own_drawing_DNN_RDM')
                 filename = fullfile(pwd, '..', 'drawings', ['gem_2-5_descriptions_', category, '_MPNet_cosine.csv']);
-            elseif strcmp(analysis_name, 'control')
+            elseif strcmp(analysis_name, 'Control_drawing_DNN_RDM')
                 filename = fullfile(pwd, '..', 'drawings', ['gem_2-5_descriptions_', category, '_control_MPNet_cosine.csv']);
-            elseif strcmp(analysis_name, 'photos')
+            elseif strcmp(analysis_name, 'Photo_DNN_RDM')
                 filename = fullfile(pwd, '..', 'photos', ['gem_2-5_descriptions_', category, '_photos_MPNet_cosine.csv']);
             end
 

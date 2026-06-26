@@ -40,3 +40,7 @@ behavior/analysis/dnn_features/vgg16_imagenet/exp_1/Own_drawing_DNN_RDM_bathroom
 behavior/analysis/dnn_features/vgg16_imagenet/exp_1/Photo_DNN_RDM_bathroom_conv1_2.mat
 behavior/analysis/dnn_features/vgg16_imagenet/exp_1/Photo_DNN_RDM_kitchen_conv1_2.mat
 behavior/analysis/dnn_features/vgg16_imagenet/exp_1/Photo_DNN_RDM_kitchen_conv1_2.mat
+behavior/analysis/functions/gemini_verbal_descriptions_beh2.ipynb
+behavior/analysis/functions/gemini_verbal_descriptions_beh.ipynb
+behavior/analysis/functions/gemini_extract_objects_from_photo_beh2.ipynb
+behavior/analysis/functions/gemini_extract_objects_from_photo_beh.ipynb
