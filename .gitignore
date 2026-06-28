@@ -44,3 +44,4 @@ behavior/analysis/functions/gemini_verbal_descriptions_beh2.ipynb
 behavior/analysis/functions/gemini_verbal_descriptions_beh.ipynb
 behavior/analysis/functions/gemini_extract_objects_from_photo_beh2.ipynb
 behavior/analysis/functions/gemini_extract_objects_from_photo_beh.ipynb
+fMRI/code/utilities/gemini_verbal_descriptions_fMRI.ipynb

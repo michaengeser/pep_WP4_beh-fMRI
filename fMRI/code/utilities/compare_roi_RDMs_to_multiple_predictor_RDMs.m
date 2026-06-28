@@ -6,6 +6,7 @@ function d = compare_roi_RDMs_to_multiple_predictor_RDMs(d, cfg)
 if ~isfield(cfg, 'RDM_to_partial_out'); cfg.RDM_to_partial_out = {'typical_late', 'control_late'}; end
 if ~isfield(cfg, 'correlation_type'); cfg.correlation_type = 'pearson';end
 if ~isfield(cfg, 'plot_rdm'); cfg.plot_rdm = false;end
+if ~isfield(cfg, 'plot_scatter'); cfg.plot_scatter = false;end
 if ~isfield(cfg, 'permutation_test'); cfg.permutation_test = false;end
 if ~isfield(cfg, 'n_permutations'); cfg.n_permutations = 10000;end
 if ~isfield(cfg, 'add_legend'); cfg.add_legend = false;end
@@ -28,6 +29,7 @@ if ~isfield(cfg, 'ylim'); cfg.ylim = [-0.4, 0.4];end
 if ~isfield(cfg, 'task_plotting'); cfg.plott_gap = 0;end
 if ~isfield(cfg, 'filter_predictors'); cfg.filter_predictors = {'_'};end % {'_'} will plot all predictors
 % get variable attributes
+figure;
 short_names = cfg.plot_names;
 
 if isempty(gcp('nocreate'))
@@ -36,7 +38,6 @@ end
 
 % prepare figure
 if cfg.plotting
-    figure;
     hold on
     previous_x_pos = 0;
 end
@@ -145,6 +146,12 @@ for roi_i = 1:numel(cfg.rois_of_interest)
 
             % get actual correaltion
             obs_r = r_mat(2:end, 1);
+
+            if cfg.plot_scatter
+                nexttile;
+                scatter(squareform(ref_RDM)', uniquePred(:, 1), '.');
+                title(["Scatter plot of ", roi, ' on ', category])
+            end
 
             fprintf('Running %d permutations...\n',cfg.n_permutations)
 
@@ -270,85 +277,87 @@ for roi_i = 1:numel(cfg.rois_of_interest)
             res_table = sortrows(res_table, 'r_val', 'descend');
         end
 
-        % make plot
-        if strcmp(cfg.plot_type, 'violin')
-            for xiPos = 1:height(res_table)
-                current_x_pos = previous_x_pos + xiPos;
-                if cfg.permutation_test
-                    Y = {perm_r_mat(xiPos,:)'};
-                end
-
-                % make violin plot
-                currentColor = [res_table.color_R(xiPos), res_table.color_G(xiPos), res_table.color_B(xiPos)];
-                mainHandles(current_x_pos) = daviolinplot(Y,...
-                    'color', currentColor,...
-                    'violin', violin_type, 'violinalpha', 0.2,...
-                    'scatter',cfg.scatter_in_violin,'scatteralpha',0.2,'jitter',1,'scattercolors', 'same', 'scattersize', 5,...
-                    'box', 0,...
-                    'outliers',0);
-                mainHandles(current_x_pos).ds.Vertices(:, 1) = mainHandles(current_x_pos).ds.Vertices(:, 1) + current_x_pos - 1;
-                mainHandles(current_x_pos).ds.EdgeColor = currentColor;
-                mainHandles(current_x_pos).ds.EdgeAlpha = 0.5;
-                mainHandles(current_x_pos).ds.LineWidth = 2;
-                if cfg.scatter_in_violin == 1
-                    mainHandles(current_x_pos).sc.XData = mainHandles(current_x_pos).sc.XData + current_x_pos - 1.05;
-                    mainHandles(current_x_pos).sc.MarkerEdgeColor = currentColor;
-                    mainHandles(current_x_pos).sc.MarkerEdgeAlpha = 0.2;
-                end
-            end
-        elseif strcmp(cfg.plot_type, 'bar')
-            for xiPos = 1:height(res_table)
-                current_x_pos = previous_x_pos + xiPos;
-                % Draw individual bar
-                barColor = [res_table.color_R(xiPos),res_table.color_G(xiPos),res_table.color_B(xiPos)];
-                mainHandles(current_x_pos) = bar(current_x_pos, res_table.r_val(xiPos),...
-                    'FaceColor', barColor, 'EdgeColor', 'k');
-            end
-        end
-        for xiPos = 1:height(res_table)
-            current_x_pos = previous_x_pos + xiPos;
-            if strcmp(cfg.plot_type, 'bar')
-                if contains(res_table.name(xiPos), 'Originhal')
-                    % Apply hatch only to this bar
-                    hatchfill2(mainHandles(current_x_pos), 'HatchAngle', 45, ...
-                        'HatchColor', 'k', ...
-                        'HatchLineWidth', 1);
-                end
-            end
-
-            if cfg.permutation_test
-                if strcmp(cfg.plot_type, 'bar')
-                    % add confidence interval if available
-                    if ismember('ci_lower', res_table.Properties.VariableNames)
-                        r_val = res_table.r_val(xiPos);
-                        errorHandles(current_x_pos) = errorbar(current_x_pos,...
-                            r_val, r_val-res_table.ci_lower(xiPos),...
-                            res_table.ci_upper(xiPos)-r_val, 'k', 'LineWidth', 1);  % Error bars
+        if cfg.plotting
+            % make plot
+            if strcmp(cfg.plot_type, 'violin')
+                for xiPos = 1:height(res_table)
+                    current_x_pos = previous_x_pos + xiPos;
+                    if cfg.permutation_test
+                        Y = {perm_r_mat(xiPos,:)'};
                     end
-                elseif strcmp(cfg.plot_type, 'violin')
-                    % plot oberseved mean r
-                    plot([current_x_pos-0.15,current_x_pos+0.15], [res_table.r_val(xiPos), res_table.r_val(xiPos)],...
-                        'Color', [res_table.color_R(xiPos), res_table.color_G(xiPos), res_table.color_B(xiPos)], 'LineWidth',3);
+
+                    % make violin plot
+                    currentColor = [res_table.color_R(xiPos), res_table.color_G(xiPos), res_table.color_B(xiPos)];
+                    mainHandles(current_x_pos) = daviolinplot(Y,...
+                        'color', currentColor,...
+                        'violin', violin_type, 'violinalpha', 0.2,...
+                        'scatter',cfg.scatter_in_violin,'scatteralpha',0.2,'jitter',1,'scattercolors', 'same', 'scattersize', 5,...
+                        'box', 0,...
+                        'outliers',0);
+                    mainHandles(current_x_pos).ds.Vertices(:, 1) = mainHandles(current_x_pos).ds.Vertices(:, 1) + current_x_pos - 1;
+                    mainHandles(current_x_pos).ds.EdgeColor = currentColor;
+                    mainHandles(current_x_pos).ds.EdgeAlpha = 0.5;
+                    mainHandles(current_x_pos).ds.LineWidth = 2;
+                    if cfg.scatter_in_violin == 1
+                        mainHandles(current_x_pos).sc.XData = mainHandles(current_x_pos).sc.XData + current_x_pos - 1.05;
+                        mainHandles(current_x_pos).sc.MarkerEdgeColor = currentColor;
+                        mainHandles(current_x_pos).sc.MarkerEdgeAlpha = 0.2;
+                    end
+                end
+            elseif strcmp(cfg.plot_type, 'bar')
+                for xiPos = 1:height(res_table)
+                    current_x_pos = previous_x_pos + xiPos;
+                    % Draw individual bar
+                    barColor = [res_table.color_R(xiPos),res_table.color_G(xiPos),res_table.color_B(xiPos)];
+                    mainHandles(current_x_pos) = bar(current_x_pos, res_table.r_val(xiPos),...
+                        'FaceColor', barColor, 'EdgeColor', 'k');
                 end
             end
-            % add marks for single category
-            if cfg.show_single_cate
-                if cfg.exp_num == 1
-                    cate_mark1 = 'B';
-                    cate_mark2 = 'K';
-                elseif cfg.exp_num == 2
-                    cate_mark1 = 'B';
-                    cate_mark2 = 'L';
+            for xiPos = 1:height(res_table)
+                current_x_pos = previous_x_pos + xiPos;
+                if strcmp(cfg.plot_type, 'bar')
+                    if contains(res_table.name(xiPos), 'Originhal')
+                        % Apply hatch only to this bar
+                        hatchfill2(mainHandles(current_x_pos), 'HatchAngle', 45, ...
+                            'HatchColor', 'k', ...
+                            'HatchLineWidth', 1);
+                    end
                 end
-                text(current_x_pos-0.2, res_table.r_val_cate1(xiPos), cate_mark1,...
-                    'HorizontalAlignment', 'center', 'FontSize', 5, 'FontWeight', 'bold');
-                text(current_x_pos-0.2, res_table.r_val_cate2(xiPos), cate_mark2,...
-                    'HorizontalAlignment', 'center', 'FontSize', 5, 'FontWeight', 'bold');
+
+                if cfg.permutation_test
+                    if strcmp(cfg.plot_type, 'bar')
+                        % add confidence interval if available
+                        if ismember('ci_lower', res_table.Properties.VariableNames)
+                            r_val = res_table.r_val(xiPos);
+                            errorHandles(current_x_pos) = errorbar(current_x_pos,...
+                                r_val, r_val-res_table.ci_lower(xiPos),...
+                                res_table.ci_upper(xiPos)-r_val, 'k', 'LineWidth', 1);  % Error bars
+                        end
+                    elseif strcmp(cfg.plot_type, 'violin')
+                        % plot oberseved mean r
+                        plot([current_x_pos-0.15,current_x_pos+0.15], [res_table.r_val(xiPos), res_table.r_val(xiPos)],...
+                            'Color', [res_table.color_R(xiPos), res_table.color_G(xiPos), res_table.color_B(xiPos)], 'LineWidth',3);
+                    end
+                end
+                % add marks for single category
+                if cfg.show_single_cate
+                    if cfg.exp_num == 1
+                        cate_mark1 = 'B';
+                        cate_mark2 = 'K';
+                    elseif cfg.exp_num == 2
+                        cate_mark1 = 'B';
+                        cate_mark2 = 'L';
+                    end
+                    text(current_x_pos-0.2, res_table.r_val_cate1(xiPos), cate_mark1,...
+                        'HorizontalAlignment', 'center', 'FontSize', 5, 'FontWeight', 'bold');
+                    text(current_x_pos-0.2, res_table.r_val_cate2(xiPos), cate_mark2,...
+                        'HorizontalAlignment', 'center', 'FontSize', 5, 'FontWeight', 'bold');
+                end
             end
         end
+        % make cap between reference RDMs
+        previous_x_pos = current_x_pos + cfg.plott_gap;
     end
-    % make cap between reference RDMs
-    previous_x_pos = current_x_pos + cfg.plott_gap;
 end
 
 if cfg.plotting
@@ -393,7 +402,7 @@ if cfg.plotting
             % get y position based on error bars
             y_pos(i_bar) = errorHandles(i_bar).YPositiveDelta + errorHandles(i_bar).YData + 0.08;
 
-        elseif strcmp(cfg.plot_type, 'violin') 
+        elseif strcmp(cfg.plot_type, 'violin')
             if all(~isgraphics(mainHandles(i_bar).ds)) || isempty(mainHandles(i_bar).ds)
                 continue
             end
@@ -415,7 +424,7 @@ if cfg.plotting
     else
         ylabel([cfg.correlation_type, ' correlation [r]', newline]);
     end
-    %title('Compare reference RDM with predictors')
+    title(['Compare reference RDM with predictors - ', cfg.dnns])
     if isfield(cfg, 'plot_type')
         ylim(cfg.ylim)
     else

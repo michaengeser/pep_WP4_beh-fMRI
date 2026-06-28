@@ -69,6 +69,7 @@ previous_x_pos = 0;
 % random samplings)
 if cfg.permutation_test
     % generate permutated subjects list
+    rng(0)
     if cfg.partial_cor
         random_seqs = cell(numel(cfg.RDM_to_partial_out), cfg.n_permutations);
     else
@@ -91,14 +92,7 @@ if cfg.permutation_test
         end
     end
 end
-if cfg.bootstrapping
-    % generate randomly sampled subjects list (with replacement)
-    random_samples = cell(1, cfg.n_bootstrapp_iterations);
-    for i = 1:cfg.n_bootstrapp_iterations
-        % get random sequence
-        random_samples{i} = randsample(1:cfg.n, cfg.n, true);
-    end
-end
+
 % loop through tasks
 for voi_n = 1:numel(cfg.tasks_of_interest)
     voi = char(cfg.tasks_of_interest(voi_n));
@@ -141,119 +135,73 @@ for voi_n = 1:numel(cfg.tasks_of_interest)
         res_table.r_val = r_mat(2:end, 1);
         % store in data struct
         d.compare_task_to_predictor.(voi).(category) = res_table;
-        % make random permutations
+
         if cfg.permutation_test
-            permutation_RDMs = RDMs;
-            perm_r_mat = zeros(height(r_mat)-1, cfg.n_permutations);
-            for perm = 1:cfg.n_permutations
-                % randomize RDM
-                if strcmp(cfg.permutation_type, 'row_col_shuffle_ref')
-                    % shuffle the order of rows and columns
-                    ref_RDM = RDMs(1);
-                    ref_RDM.RDM = ref_RDM.RDM(random_seqs{1,perm}, random_seqs{1,perm});
-                    % replace reference RDM by permutated RDM in RDMs struct
-                    permutation_RDMs(1) = ref_RDM;
-                elseif ismember(cfg.permutation_type, {'row_col_shuffle_pred_all','row_col_shuffle_pred_plus_reoder'})
-                    % re-order predictors
-                    if strcmp(cfg.permutation_type, 'row_col_shuffle_pred_plus_reoder')
-                        permutation_RDMs(2:end) = permutation_RDMs(randperm(numel(cfg.RDM_to_partial_out))+1);
-                    end
-                    % shuffle ros and columns in predictors
-                    for pred = 1:numel(cfg.RDM_to_partial_out)
-                        % get predictor RDM
-                        pred_RDM = permutation_RDMs(pred+1).RDM;
-                        % replace predictor RDM by permutated RDM in RDMs struct
-                        permutation_RDMs(pred+1).RDM = pred_RDM(random_seqs{pred, perm}, random_seqs{pred, perm});
-                    end
-                elseif strcmp(cfg.permutation_type, 'sign_flip_ref')
-                    ref_RDM_rand = ref_RDM;
-                    % flip sign of row
-                    ref_RDM_rand.RDM(random_seqs{1,perm},:) = -(ref_RDM.RDM(random_seqs{1,perm},:));
-                    % flip sign of columns
-                    ref_RDM_rand.RDM(:,random_seqs{1,perm}) = -(ref_RDM.RDM(:,random_seqs{1,perm}));
-                    % replace reference RDM by permutated RDM in RDMs struct
-                    permutation_RDMs(1) = ref_RDM_rand;
-                end
-                % run partial correlation
-                if ~strcmp(cfg.permutation_type, 'row_col_shuffle_pred')
-                    % partial correlation
-                    if cfg.partial_cor
-                        [~, r_mat, ~, ~] = partial_cor_RDM(cfg, permutation_RDMs);
-                    else
-                        [~, r_mat, ~] = cor_RDM(permutation_RDMs,cfg);
-                    end
-                    perm_r_mat(1:end, perm) = r_mat(2:end, 1);
-                else
-                    % if permutation of only one predictor while leaving the one to partial out
-                    % intact we have to loop through the predictors and do correaltions
-                    % seperately
-                    % shuffle ros and columns in predictors
-                    for pred = 1:numel(cfg.RDM_to_partial_out)
-                        % get predictor RDM
-                        permutation_RDMs = RDMs;
-                        pred_RDM = permutation_RDMs(pred+1).RDM;
-                        % replace predictor RDM by permutated RDM in RDMs struct
-                        permutation_RDMs(pred+1).RDM = pred_RDM(random_seqs{pred, perm}, random_seqs{pred, perm});
-                        [~, r_mat, ~, ~] = partial_cor_RDM(cfg, permutation_RDMs);
-                        perm_r_mat(pred, perm) = r_mat(pred+1, 1);
-                    end
-                end
-                if mod(perm/cfg.n_permutations, 0.1) == 0
-                    disp([num2str((perm/cfg.n_permutations)*100), '% of permutations of ', voi, ' ', category, ' is done'])
-                end
+            nPred = numel(cfg.RDM_to_partial_out);
+
+            % reference RDM
+            ref_RDM = RDMs(1).RDM;
+
+            % get predictors and regress out from each other
+            for iPred = 1:nPred
+                RDMs(iPred+1).RDM(eye(cfg.n)==1) = 0;
+                all_preds(:,iPred) = squareform(RDMs(iPred+1).RDM);
             end
-            d.compare_task_to_predictor.permutation_test.(voi).(category) = perm_r_mat;
-        end
-        % make bootstrapping
-        if cfg.bootstrapping
-            resampled_RDMs = RDMs;
-            bootstrapped_r_mat = zeros(height(r_mat)-1, cfg.n_bootstrapp_iterations);
-            for iter = 1:cfg.n_bootstrapp_iterations
-                % resample RDMs
-                for rdm = 1:numel(RDMs)
-                    % get RDM
-                    target_RDM = RDMs(rdm).RDM;
-                    if strcmp(cfg.bootstrapp_type,'w/o_removing')
-                        target_RDM(logical(eye(size(target_RDM)))) = 1;
-                    elseif strcmp(cfg.bootstrapp_type,'removing')
-                        target_RDM(logical(eye(size(target_RDM)))) = NaN;
-                    end
-                    % add resampled RDM
-                    resampled_RDMs(rdm).RDM = target_RDM(random_samples{iter},random_samples{iter});
+
+            % residualized predictors
+            uniquePred = zeros(size(all_preds));
+            if cfg.partial_cor && nPred > 1
+                for iPred = 1:nPred
+
+                    % all other predictors
+                    otherIdx = setdiff(1:nPred, iPred);
+                    X = all_preds(:,otherIdx);
+                    X = [X, ones(size(X,1),1)];
+                    b = X \ all_preds(:,iPred);
+
+                    % keep residual (unique variance)
+                    uniquePred(:,iPred) = all_preds(:,iPred) - X*b;
+
                 end
-                % run partial correlation
-                [~, r_mat, ~, ~] = partial_cor_RDM(cfg, resampled_RDMs);
-                bootstrapped_r_mat(1:end, iter) = r_mat(2:end, 1);
-                if mod(iter/cfg.n_bootstrapp_iterations, 0.1) == 0
-                    disp([num2str((iter/cfg.n_bootstrapp_iterations)*100), '% of bootstrapping of ', voi, ' ', category, ' is done'])
-                end
+            else
+                uniquePred = all_preds;
             end
-            d.compare_task_to_predictor.bootstrapping.(voi).(category) = bootstrapped_r_mat;
+
+            % get actual correaltion
+            obs_r = r_mat(2:end, 1);
+
+            fprintf('Running %d permutations...\n',cfg.n_permutations)
+
+            % create permutations
+            allPerms = nan(cfg.n_permutations, nchoosek(cfg.n, 2));
+            parfor p = 1:cfg.n_permutations
+
+                % shuffle neural RDM
+                RDM_shuffled = ref_RDM(random_seqs{1,p}, random_seqs{1,p});
+                allPerms(p, :) = squareform(RDM_shuffled);
+            end
+
+            % run correlations for each predictor
+            d.compare_task_to_predictor.permutation_test.(voi).(category) = ...
+                corr(allPerms', uniquePred, 'row', 'pairwise', 'type', cfg.partial_correlation_type)';
         end
+
         % runtime control
         disp(['Compare inter-subject RDM of ', voi, ' with correaltion of predictor RDMs - ', category])
 
         % store in data struct
         d.compare_task_to_predictor.(voi).(category) = res_table;
     end
+
     % average categories
     res_table.r_val_cate1 = d.compare_task_to_predictor.(voi).(cfg.categories{1}).r_val;
     res_table.r_val_cate2 = d.compare_task_to_predictor.(voi).(cfg.categories{2}).r_val;
     res_table.r_val = (d.compare_task_to_predictor.(voi).(cfg.categories{1}).r_val +...
         d.compare_task_to_predictor.(voi).(cfg.categories{2}).r_val)/2;
     d.compare_task_to_predictor.(voi).category_average = res_table;
+
     % get confidence intervals
-    if cfg.bootstrapping
-        % average categories
-        boot_r_vals_cate1 = d.compare_task_to_predictor.bootstrapping.(voi).(cfg.categories{1});
-        boot_r_vals_cate2 = d.compare_task_to_predictor.bootstrapping.(voi).(cfg.categories{2});
-        bootstrapping_r_vals = (boot_r_vals_cate1 + boot_r_vals_cate2)/2;
-        % get confidence intervals and store in result table
-        cis = prctile(bootstrapping_r_vals', [5, 95]);
-        res_table.ci_upper = cis(2,:)';
-        res_table.ci_lower = cis(1,:)';
-        res_table.boot_median = median(bootstrapping_r_vals')';
-    elseif cfg.permutation_test
+    if cfg.permutation_test
         % get p values of random permutation
         perm_r_mat = (d.compare_task_to_predictor.permutation_test.(voi).(cfg.categories{1}) +...
             d.compare_task_to_predictor.permutation_test.(voi).(cfg.categories{2}))/2;
@@ -476,9 +424,9 @@ if cfg.plotting
 
     % collect p values
     all_p_vals = nan(height(res_table), numel(cfg.tasks_of_interest));
-    for roi_i = 1:numel(cfg.tasks_of_interest)
-        voi = char(cfg.tasks_of_interest(roi_i));
-        all_p_vals(:, roi_i) = d.compare_task_to_predictor.(voi).category_average.p_val;
+    for voi_i = 1:numel(cfg.tasks_of_interest)
+        voi = char(cfg.tasks_of_interest(voi_i));
+        all_p_vals(:, voi_i) = d.compare_task_to_predictor.(voi).category_average.p_val;
     end
 
     % get asterisks
@@ -491,11 +439,11 @@ if cfg.plotting
         % write back adjusted p values and print them
         disp([newline, newline])
         disp(string(res_table.name(i_pred)))
-        for roi_i = 1:numel(cfg.tasks_of_interest)
-            voi = char(cfg.tasks_of_interest(roi_i));
-            d.compare_task_to_predictor.(voi).category_average.p_val(i_pred) = fdr_pval(roi_i);
-            disp(['FDR corrected p value for ', voi, ': ', num2str(fdr_pval(roi_i)),...
-                ' ', char(all_asterisks(i_pred, roi_i))])
+        for voi_i = 1:numel(cfg.tasks_of_interest)
+            voi = char(cfg.tasks_of_interest(voi_i));
+            d.compare_task_to_predictor.(voi).category_average.p_val(i_pred) = fdr_pval(voi_i);
+            disp(['FDR corrected p value for ', voi, ': ', num2str(fdr_pval(voi_i)),...
+                ' ', char(all_asterisks(i_pred, voi_i))])
             disp(['R value for ', voi, ': ', ...
                 num2str(d.compare_task_to_predictor.(voi).category_average.r_val((xiPos)))])
         end

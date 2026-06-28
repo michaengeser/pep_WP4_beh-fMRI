@@ -20,11 +20,16 @@ else
 
             %% Choose input file
             if strcmp(analysis_name, 'Own_drawing_DNN_RDM')
-                filename = fullfile(pwd, '..', 'drawings', ['gem_2-5_descriptions_', category, '_MPNet_cosine.csv']);
+                filename = fullfile(pwd, '..', 'image_similarities', 'drawings_draw3D', ...
+                    'used_drawings_exp1', 'own', category,...
+                    ['gem_2-5_descriptions_', category, '_MPNet_spearman.csv']);
             elseif strcmp(analysis_name, 'Control_drawing_DNN_RDM')
-                filename = fullfile(pwd, '..', 'drawings', ['gem_2-5_descriptions_', category, '_control_MPNet_cosine.csv']);
+                filename = fullfile(pwd, '..', 'image_similarities', 'drawings_draw3D', ...
+                    'used_drawings_exp1', 'control', category,...
+                    ['gem_2-5_descriptions_', category, '_control_MPNet_spearman.csv']);
             elseif strcmp(analysis_name, 'Photo_DNN_RDM')
-                filename = fullfile(pwd, '..', 'photos', ['gem_2-5_descriptions_', category, '_photos_MPNet_cosine.csv']);
+                filename = fullfile(pwd, '..', 'image_similarities', 'pictures', category,...
+                    ['gem_2-5_descriptions_', category, '_photos_MPNet_spearman.csv']);
             end
 
             %% Read CSV

@@ -124,6 +124,7 @@ for roi_i = 1:numel(cfg.rois_of_interest)
 
         % store in data struct
         d.compare_roi_to_predictor.(roi).(category) = res_table;
+        
         % make random permutations
         if cfg.permutation_test
             nPred = numel(cfg.RDM_to_partial_out);

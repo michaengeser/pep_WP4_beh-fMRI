@@ -2,6 +2,7 @@ function d = get_object_sim(d, cfg)
 
 if ~isfield(cfg, 'analysis_names'); cfg.analysis_names = {'typical'  'control'  'photos'};end
 if ~isfield(cfg, 'force_recompute'); cfg.force_recompute = false;end
+if ~isfield(cfg, 'do_score'); cfg.do_score = false;end
 if ~isfield(cfg, 'dissimilarity'); cfg.dissimilarity = true;end
 
 % Computes pairwise object overlap and object sparsity comparison across all rows in the object CSV.
@@ -80,6 +81,17 @@ else
             % get inter-subject RDM for object count
             objectCount_mat = abs(subObjectCount - subObjectCount');
 
+            if ~cfg.dissimilarity
+                objectCount_mat = max(objectCount_mat, [], "all") - objectCount_mat;
+            end
+
+            if cfg.do_score
+                vec = squareform(objectCount_mat);
+                vec = zscore(vec);
+                vec = vec-min(vec);
+                objectCount_mat = squareform(vec);
+            end
+
             %% Compute pairwise object overlap and object sparsity
             objectSim_mat = zeros(nRows, nRows);
 
@@ -95,10 +107,18 @@ else
                     end
                 end
             end
-            
+  
             if cfg.dissimilarity
                 objectSim_mat = 1 - objectSim_mat;
-            end 
+            end
+
+            if cfg.do_score
+                objectSim_mat(eye(size(objectSim_mat)) == 1) = 0;
+                vec = squareform(objectSim_mat);
+                vec = zscore(vec);
+                vec = vec-min(vec);
+                objectSim_mat = squareform(vec);
+            end
 
             objectSim.(analysis_name).(category).subject_mean.name = 'objectSim';
             objectSim.(analysis_name).(category).subject_mean.color = [0,0,0];
