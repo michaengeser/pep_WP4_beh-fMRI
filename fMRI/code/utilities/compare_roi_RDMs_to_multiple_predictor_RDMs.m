@@ -25,9 +25,10 @@ if cfg.scatter_in_violin == 0
 elseif cfg.scatter_in_violin == 1
     violin_type = 'half';
 end
-if ~isfield(cfg, 'ylim'); cfg.ylim = [-0.4, 0.4];end
+if ~isfield(cfg, 'ylim'); cfg.ylim = [-0.3, 0.3];end
 if ~isfield(cfg, 'task_plotting'); cfg.plott_gap = 0;end
 if ~isfield(cfg, 'filter_predictors'); cfg.filter_predictors = {'_'};end % {'_'} will plot all predictors
+
 % get variable attributes
 figure;
 short_names = cfg.plot_names;
@@ -103,7 +104,9 @@ for roi_i = 1:numel(cfg.rois_of_interest)
         if cfg.partial_cor
             [~, r_mat, ~, cfg] = partial_cor_RDM(cfg, RDMs);
         else
-            [~, r_mat, ~] = cor_RDM(RDMs,cfg);
+            cfg.dissimilarity = false;
+            cfg.regressOutMean = false;
+            [~, r_mat, ~] = cor_RDM(RDMs, cfg);
         end
         % store results in table
         res_table = table;
@@ -128,6 +131,14 @@ for roi_i = 1:numel(cfg.rois_of_interest)
             % residualized predictors
             uniquePred = zeros(size(all_preds));
             if cfg.partial_cor && nPred > 1
+
+                % transform to ranks for spearman correlation
+                if strcmp(lower(cfg.partial_correlation_type), 'spearman')
+                    for iPred = 1:nPred
+                        all_preds(:, iPred) = tiedrank(all_preds(:, iPred));
+                    end
+                end
+
                 for iPred = 1:nPred
 
                     % all other predictors

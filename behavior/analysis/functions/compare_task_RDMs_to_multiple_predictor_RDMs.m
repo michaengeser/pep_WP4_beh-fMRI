@@ -23,7 +23,7 @@ if cfg.scatter_in_violin == 0
 elseif cfg.scatter_in_violin == 1
     violin_type = 'half';
 end
-if ~isfield(cfg, 'ylim'); cfg.ylim = [-0.4, 0.4];end
+if ~isfield(cfg, 'ylim'); cfg.ylim = [-0.3, 0.3];end
 if ~isfield(cfg, 'task_plotting'); cfg.plott_gap = 0;end
 if ~isfield(cfg, 'filter_predictors'); cfg.filter_predictors = {'_'};end % {'_'} will plot all predictors
 % get variable attributes
@@ -126,6 +126,14 @@ for task_i = 1:numel(cfg.tasks_of_interest)
             % residualized predictors
             uniquePred = zeros(size(all_preds));
             if cfg.partial_cor && nPred > 1
+
+                % transform to ranks for spearman correlation
+                if strcmp(lower(cfg.partial_correlation_type), 'spearman')
+                    for iPred = 1:nPred
+                        all_preds(:, iPred) = tiedrank(all_preds(:, iPred));
+                    end
+                end
+
                 for iPred = 1:nPred
 
                     % all other predictors
