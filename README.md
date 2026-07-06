@@ -1,4 +1,4 @@
-# Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes
+# Inter-individual similarities in internal models predict similarities in the perception and neural processing of scenes
 
 This repository contains the code and data of the paper:
 
