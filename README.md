@@ -2,7 +2,7 @@
 
 This repository contains the code and data of the paper:
 
-### Engeser & Kaiser (2025). Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes. (Preprint: https://doi.org/10.31234/osf.io/hd6je_v1)
+### Engeser & Kaiser (2026). Inter-individual similarities in internal models predict similarities in the perception and neural processing of scenes. (Preprint: https://doi.org/10.31234/osf.io/hd6je_v1)
 
 It includes the experimental code as well as the analysis scripts and materials for the inter-subject representational similarity analysis.
 
@@ -130,7 +130,7 @@ run_experiment_fMRI.m for the fMRI experiment
 
 
 ### Analysis
-Most analyses are implemented in MATLAB (R2022a - 9.12.0.2327980) including SPM12. Additionally, R (4.3.1) was used for linear mixed-effects (LME) modeling and Python (3.10) for CLIP and DINO feature extraction.
+Most analyses are implemented in MATLAB (R2022a - 9.12.0.2327980), including SPM12. Additionally, R (4.3.1) was used for linear mixed-effects (LME) modeling, and Python (3.10) for accessing CLIP, DINO, Gemini, and MPNet.
 
 To reproduce the analyses:
 
@@ -146,7 +146,7 @@ If anything is unclear, feel free to contact me.
 
 If you use this repository, please cite:
 
-Engeser, M., & Kaiser, D. (2025). Inter-individual similarities in internal models of the world shape similarities in the perception and neural processing of scenes.
+Engeser, M., & Kaiser, D. (2026). Inter-individual similarities in internal models predict similarities in the perception and neural processing of scenes.
 
 
 
