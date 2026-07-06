@@ -79,6 +79,7 @@ else
             end
 
             % get inter-subject RDM for object count
+            disp(['Mean: ', num2str(mean(subObjectCount, 'all'))])
             objectCount_mat = abs(subObjectCount - subObjectCount');
 
             if ~cfg.dissimilarity
