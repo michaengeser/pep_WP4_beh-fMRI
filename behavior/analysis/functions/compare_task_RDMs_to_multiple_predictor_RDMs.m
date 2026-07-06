@@ -126,6 +126,14 @@ for task_i = 1:numel(cfg.tasks_of_interest)
             % residualized predictors
             uniquePred = zeros(size(all_preds));
             if cfg.partial_cor && nPred > 1
+
+                % transform to ranks for spearman correlation
+                if strcmp(lower(cfg.partial_correlation_type), 'spearman')
+                    for iPred = 1:nPred
+                        all_preds(:, iPred) = tiedrank(all_preds(:, iPred));
+                    end
+                end
+
                 for iPred = 1:nPred
 
                     % all other predictors
