@@ -2,24 +2,24 @@
 
 This repository contains the code and data of the paper:
 
-### Engeser & Kaiser (2026). Inter-individual similarities in internal models predict similarities in the perception and neural processing of scenes. (Preprint: https://doi.org/10.31234/osf.io/hd6je_v1)
+### Engeser & Kaiser (2026). Inter-individual similarities in internal models predict similarities in the perception and neural processing of scenes. (Preprint: https://osf.io/preprints/psyarxiv/hd6je_v3)
 
 It includes the experimental code as well as the analysis scripts and materials for the inter-subject representational similarity analysis.
 
 ## Installation 
 Download or clone the repository (~7GB without fMRI data). Download VGG16 network files (https://osf.io/zjtwx/) and place them in the folders named accordingly. 
 
-To reproduce the outouts from the paper, the intermediate files included in this repository are sufficient.
+To reproduce the outputs from the paper, the intermediate files included in this repository are sufficient.
 Download the fMRI data only if you wish to reproduce the full preprocessing or time-course extraction. Corresponding code is included in the repository.
 
 Download and installation should take <30 min. on a "normal" computer (without fMRI data).
 
-The code is mostly written in Matlab (R2022a) on Windows 11. Installation on other operating systems might need minor adjustments.
+The code is mostly written in MATLAB (R2022a) on Windows 11. Installation on other operating systems might need minor adjustments.
 
-Additionally install the following software dependencies: Psychtoolbox (3.0.19) for running the experiment and SPM12 for fMRI analysis
+Additionally, install the following software dependencies: Psychtoolbox (3.0.19) for running the experiment and SPM12 for fMRI analysis
 
 ## Demo
-As a demo you can run the analysis live script of the second experiment (pep_WP4_beh-fMRI\behavior\analysis\analysis_script_exp2.mlx). This contains the core steps of the inter-subject RSA framework, including building IS-RDMs of the drawings and task performance, comparing the IS-RDMs and statistical testing. More detailed information on runing the code can be found in the markdown sections of the live script.
+As a demo, you can run the analysis live script of the second experiment (pep_WP4_beh-fMRI\behavior\analysis\analysis_script_exp2.mlx). This contains the core steps of the inter-subject RSA framework, including building IS-RDMs of the drawings and task performance, comparing the IS-RDMs, and statistical testing. More detailed information on running the code can be found in the Markdown sections of the live script.
 
 The demo should take <10 min. on a "normal" computer.
 
